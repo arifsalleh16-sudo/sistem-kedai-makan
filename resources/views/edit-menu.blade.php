@@ -26,7 +26,7 @@
 
     @foreach($categories as $category)
 
-        <option value="{{ $category->id }}" {{ $menu->category_id == $category->id ? 'selected' : '' }}>
+        <option value="{{ $category->id }}" 
             {{ $category->nama }}
         </option>
 
