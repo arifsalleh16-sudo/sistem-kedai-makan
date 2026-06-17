@@ -63,8 +63,11 @@ public function edit($id)
 {
     $menu = Menu::find($id);
 
+    $categories = Category::all();
+
     return view('edit-menu', [
-        'menu' => $menu
+        'menu' => $menu,
+        'categories' => $categories
     ]);
 }
 
@@ -75,7 +78,7 @@ public function update(Request $request, $id)
     $menu->update([
         'nama' => $request->nama,
         'harga' => $request->harga,
-        'kategori' => $request->kategori
+        'category_id' => $request->category_id
     ]);
 
     return redirect('/menu');
