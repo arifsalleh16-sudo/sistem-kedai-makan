@@ -77,16 +77,9 @@ class DashboardController extends Controller
             'jumlahItemTerjual' => $jumlahItemTerjual,
             'menuPalingLaris' => $menuPalingLaris,
             'jualanHariIni' => $jualanHariIni,
-            'itemTerjualHariIni' => $itemTerjualHariIni
+            'itemTerjualHariIni' => $itemTerjualHariIni,
+            'topMenus' => $topMenus
         ]);
 
-        return view('dashboard', compact(
-          'jumlahSales',
-          'jumlahItemTerjual',
-          'jumlahMenu',
-          'jumlahUser',
-          'menuPalingLaris',
-          'topMenus'
-        ));
     }
 }
