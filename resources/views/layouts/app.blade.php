@@ -39,11 +39,6 @@
                 Sales
             </a>
 
-            <a href="/category"
-               class="block p-3 rounded-lg hover:bg-slate-800">
-                Category
-            </a>
-
         </nav>
 
     </aside>

@@ -159,12 +159,13 @@
 new Chart(
     document.getElementById('salesChart'),
     {
-        type: 'bar',
+        type: 'line',
         data: {
-            labels: ['Isnin','Selasa','Rabu','Khamis','Jumaat'],
+            labels: labels,
             datasets: [{
-                label: 'Jualan',
-                data: [50,40,70,20,78]
+                label: 'Jualan Harian (RM)',
+                data: data,
+                tension: 0.4
             }]
         }
     }

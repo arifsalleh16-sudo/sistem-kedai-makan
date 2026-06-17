@@ -64,6 +64,14 @@ class DashboardController extends Controller
          ->take(5)
          ->get();
 
+         $salesByDate = Sale::selectRaw('DATE(created_at) as tarikh, SUM(total_harga) as jumlah')
+        ->groupBy('tarikh')
+        ->orderBy('tarikh')
+        ->get();
+
+        $chartLabels = $salesByDate->pluck('tarikh');
+        $chartData = $salesByDate->pluck('jumlah');
+
         return view('dashboard', [
             'jumlahMenu' => $jumlahMenu,
             'jumlahUser' => $jumlahUser,
@@ -78,7 +86,9 @@ class DashboardController extends Controller
             'menuPalingLaris' => $menuPalingLaris,
             'jualanHariIni' => $jualanHariIni,
             'itemTerjualHariIni' => $itemTerjualHariIni,
-            'topMenus' => $topMenus
+            'topMenus' => $topMenus,
+            "chartLabels" => $chartLabels,
+            "chartData" => $chartData,
         ]);
 
     }
