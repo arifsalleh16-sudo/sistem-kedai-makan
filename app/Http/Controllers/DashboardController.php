@@ -36,7 +36,9 @@ class DashboardController extends Controller
 
         foreach ($sales as $sale) {
 
+          if ($sale->menu) {
         $jumlahSales += $sale->menu->harga * $sale->kuantiti;
+         }
 
         }
 
