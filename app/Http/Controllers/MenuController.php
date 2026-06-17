@@ -40,13 +40,13 @@ public function store(Request $request)
     $request->validate([
         'nama' => 'required',
         'harga' => 'required|numeric|min:0',
-        'kategori' => 'required'
+        'category_id' => 'required'
     ],
      [
         'nama.required' => 'Nama menu wajib diisi.',
         'harga.required' => 'Harga wajib diisi.',
         'harga.numeric' => 'Harga mesti nombor.',
-        'kategori.required' => 'Kategori wajib diisi.'
+        'category_id.required' => 'Kategori wajib diisi.'
     ]
 );
 
