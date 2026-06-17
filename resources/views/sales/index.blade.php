@@ -55,7 +55,6 @@
                 <th>Kategori</th>
                 <th>Kuantiti</th>
                 <th>Tarikh</th>
-                <th>Tindakan</th>
             </tr>
         </thead>
 
@@ -71,40 +70,11 @@
 
                 <td>RM {{ number_format($sale->menu->harga,2) }}</td>
 
-                <td>{{ $sale->menu->kategori }}</td>
+                <td>{{ $sale->menu->category->nama }}</td>
 
                 <td>{{ $sale->kuantiti }}</td>
 
                 <td>{{ $sale->created_at->format('d M Y, H:i') }}</td>
-
-                <td>
-
-                    <a
-                        href="/sales/{{ $sale->id }}/edit"
-                        class="btn btn-primary btn-sm"
-                    >
-                        Edit
-                    </a>
-
-                    <form
-                        action="/sales/{{ $sale->id }}"
-                        method="POST"
-                        style="display:inline;"
-                    >
-                        @csrf
-                        @method('DELETE')
-
-                        <button
-                            class="btn btn-danger btn-sm"
-                            type="submit"
-                            onclick="return confirm('Padam jualan ini?')"
-                        >
-                            Delete
-                        </button>
-
-                    </form>
-
-                </td>
 
             </tr>
 

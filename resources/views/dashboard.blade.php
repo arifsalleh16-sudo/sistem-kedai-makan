@@ -181,7 +181,7 @@
 
                     <h5>Menu Paling Laris</h5>
 
-                    <h2>{{ $menuPalingLaris->menu->nama ?? 'Tiada Data' }}</h2>
+                    <h2>{{ $menuPalingLaris->menu->nama}}</h2>
                     <p>{{ $menuPalingLaris->jumlah}} Unit</p>
 
                 </div>
