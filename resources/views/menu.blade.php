@@ -1,118 +1,108 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Menu</title>
+@extends('layouts.app')
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+@section('content')
 
+<div class="bg-white rounded-2xl shadow p-6">
 
+    <div class="flex justify-between items-center mb-6">
 
-<div class="container mt-5">
+        <div>
+            <h1 class="text-3xl font-bold text-slate-800">
+                Menu Management
+            </h1>
 
-    <h1>Menu Hari Ini</h1>
-    
-    <a href="/dashboard" class="btn btn-primary mb-3">
-        Kembali ke Dasboard
-    </a>
-
-    <a href="/menu/create" class="btn btn-success mb-3">
-        Tambah Menu
-    </a>
-
-    <form method="GET" action="/menu" class="mb-3">
-
-    <div class="row">
-
-        <div class="col-md-4">
-
-            <input
-                type="text"
-                 name="search"
-                value="{{ request('search') }}"
-                class="form-control"
-                placeholder="Cari menu..."
->
-
+            <p class="text-slate-500">
+                Urus semua menu makanan dan minuman
+            </p>
         </div>
 
-        <div class="col-md-2">
-
-            <button class="btn btn-primary">
-                Cari
-            </button>
-
-        </div>
+        <a href="/menu/create"
+           class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
+            + Tambah Menu
+        </a>
 
     </div>
 
-</form>
+    <form method="GET" class="mb-6">
 
-    <table class="table table-bordered table-striped">
+        <input
+            type="text"
+            name="search"
+            placeholder="Cari menu..."
+            class="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
 
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nama Menu</th>
-                <th>Harga</th>
-                <th>Kategori</th>
-                <th>Tindakan</th>
-            </tr>
-        </thead>
+    </form>
 
-        <tbody>
+    <div class="overflow-x-auto">
 
-        @foreach($menus as $menu)
+        <table class="w-full">
 
-            <tr>
+            <thead>
 
-                <td>{{ $menu->id }}</td>
+                <tr class="bg-slate-100">
 
-                <td>{{ $menu->nama }}</td>
+                    <th class="text-left p-4">Nama Menu</th>
+                    <th class="text-left p-4">Kategori</th>
+                    <th class="text-left p-4">Harga</th>
+                    <th class="text-center p-4">Tindakan</th>
 
-                <td>RM {{ number_format($menu->harga,2) }}</td>
+                </tr>
 
-                <td>{{ $menu->category->nama }}</td>
+            </thead>
 
-                <td>
+            <tbody>
 
-                    <a
-                        href="/menu/{{ $menu->id }}/edit"
-                        class="btn btn-primary btn-sm"
-                    >
-                        Edit
-                    </a>
+                @foreach($menus as $menu)
 
-                    <form
-                        action="/menu/{{ $menu->id }}"
-                        method="POST"
-                        style="display:inline;"
-                    >
-                        @csrf
-                        @method('DELETE')
+                <tr class="border-b hover:bg-slate-50">
 
-                        <button
-                            class="btn btn-danger btn-sm"
-                            type="submit"
-                            onclick="return confirm('Padam menu ini?')"
-                        >
-                            Delete
-                        </button>
+                    <td class="p-4 font-medium">
+                        {{ $menu->nama }}
+                    </td>
 
-                    </form>
+                    <td class="p-4">
 
-                </td>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">
 
-            </tr>
+                            {{ $menu->category->nama }}
 
-        @endforeach
+                        </span>
 
-        </tbody>
+                    </td>
 
-    </table>
+                    <td class="p-4 font-semibold">
+
+                        RM {{ number_format($menu->harga,2) }}
+
+                    </td>
+
+                    <td class="p-4 text-center">
+
+                        <a href="/menu/{{ $menu->id }}/edit"
+                           class="bg-yellow-500 text-white px-3 py-2 rounded-lg">
+                            Edit
+                        </a>
+
+                        <form action="/menu/{{ $menu->id }}" method="POST" class="inline-block">
+                            @csrf
+                            @method('DELETE')
+                            <button
+                                class="bg-red-500 text-white px-3 py-2 rounded-lg ml-2">
+                                Delete
+                            </button>
+                        </form>
+
+                    </td>
+
+                </tr>
+
+                @endforeach
+
+            </tbody>
+
+        </table>
+
+    </div>
 
 </div>
-
-</body>
-</html>
+@endsection
