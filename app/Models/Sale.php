@@ -15,16 +15,10 @@ class Sale extends Model
 
     public function menu()
     {
+
         return $this->belongsTo(Menu::class);
+
     }
 
-    public function store(Request $request)
-{
-    Sale::create([
-        'menu_id' => $request->menu_id,
-        'kuantiti' => $request->kuantiti
-    ]);
 
-    return redirect('/sales/create');
-}
 }

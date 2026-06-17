@@ -64,10 +64,14 @@ class DashboardController extends Controller
          ->take(5)
          ->get();
 
-         $salesByDate = Sale::selectRaw('DATE(created_at) as tarikh, SUM(jumlahSales) as jumlah')
-        ->groupBy('tarikh')
-        ->orderBy('tarikh')
-        ->get();
+        $salesByDate = Sale::join('menus', 'sales.menu_id', '=', 'menus.id')
+         ->selectRaw('
+        DATE(sales.created_at) as tarikh,
+        SUM(menus.harga * sales.kuantiti) as jumlah
+        ')
+          ->groupBy('tarikh')
+          ->orderBy('tarikh')
+          ->get();
 
         $chartLabels = $salesByDate->pluck('tarikh');
         $chartData = $salesByDate->pluck('jumlah');

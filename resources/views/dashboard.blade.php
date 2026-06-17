@@ -156,6 +156,9 @@
 
 <script>
 
+const labels = @json($chartLabels);
+const salesData = @json($chartData);
+
 new Chart(
     document.getElementById('salesChart'),
     {
@@ -163,9 +166,10 @@ new Chart(
         data: {
             labels: labels,
             datasets: [{
-                label: 'Jualan Harian (RM)',
-                data: data,
-                tension: 0.4
+                label: 'Jualan (RM)',
+                data: salesData,
+                tension: 0.4,
+                fill: false
             }]
         }
     }
