@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 <!DOCTYPE html>
 <html>
 <head>
@@ -171,3 +174,4 @@ new Chart(
 
 </body>
 </html>
+@endsection
