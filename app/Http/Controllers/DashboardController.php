@@ -16,15 +16,15 @@ class DashboardController extends Controller
 
         $jumlahUser = User::count();
 
-        $jumlahMenuMakanan = Menu::where('kategori', 'makanan')->count();
+        $jumlahMenuMakanan = Menu::where('category_id', 1)->count();
 
-        $jumlahMenuMinuman = Menu::where('kategori', 'minuman')->count();
+        $jumlahMenuMinuman = Menu::where('category_id', 2)->count();
 
-        $jumlahMenuDessert = Menu::where('kategori', 'dessert')->count();
+        $jumlahMenuDessert = Menu::where('category_id', 3)->count();
 
-        $menuMakananPalingMahal = Menu::where('kategori', 'makanan')->orderBy('harga', 'desc')->first();  
+        $menuMakananPalingMahal = Menu::where('category_id', 1)->orderBy('harga', 'desc')->first();  
 
-        $menuMakananPalingMurah = Menu::where('kategori', 'makanan')->orderBy('harga', 'asc')->first();
+        $menuMakananPalingMurah = Menu::where('category_id', 1)->orderBy('harga', 'asc')->first();
 
         $jumlahNilaiSemuaMenu = Menu::sum('harga');
 
