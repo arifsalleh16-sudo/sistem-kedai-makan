@@ -22,12 +22,17 @@
     >
 
     <label>Kategori:</label>
-    <input
-        type="text"
-        name="kategori"
-        value="{{ $menu->kategori }}"
-        
-    >
+     <select name="category_id">
+
+    @foreach($categories as $category)
+
+        <option value="{{ $category->id }}" {{ $menu->category_id == $category->id ? 'selected' : '' }}>
+            {{ $category->nama }}
+        </option>
+
+    @endforeach
+
+    </select>
 
     <br><br>
 
