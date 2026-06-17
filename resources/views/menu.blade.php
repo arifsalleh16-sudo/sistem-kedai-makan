@@ -69,7 +69,7 @@
 
                 <td>RM {{ number_format($menu->harga,2) }}</td>
 
-                <td>{{ $menu->kategori }}</td>
+                <td>{{ $menu->category->nama }}</td>
 
                 <td>
 

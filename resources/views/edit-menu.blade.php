@@ -20,20 +20,6 @@
         name="harga"
         value="{{ $menu->harga }}"
     >
-
-    <label>Kategori:</label>
-     <select name="category_id">
-
-    @foreach($categories as $category)
-
-        <option value="{{ $category->id }}" 
-            {{ $category->nama }}
-        </option>
-
-    @endforeach
-
-    </select>
-
     <br><br>
 
     <button type="submit">
