@@ -111,7 +111,7 @@
 
                     <h5>Menu Makanan Paling Mahal</h5>
 
-                    <h2>{{ $menuMakananPalingMahal->nama}}</h2>
+                    <h2>{{ $menuMakananPalingMahal->nama ?? 'Tiada Data' }}</h2>
 
                 </div>
 
@@ -127,7 +127,7 @@
 
                     <h5>Menu Makanan Paling Murah</h5>
 
-                    <h2>{{ $menuMakananPalingMurah->nama }}</h2>
+                    <h2>{{ $menuMakananPalingMurah->nama ?? 'Tiada Data' }}</h2>
 
                 </div>
 
@@ -168,7 +168,7 @@
 
                     <h5>Jumlah Item Terjual</h5>
 
-                    <h2>{{ $jumlahItemTerjual }}</h2>
+                    <h2>{{ $jumlahItemTerjual ?? '0' }}</h2>
 
                 </div>
             </div>
@@ -181,19 +181,14 @@
 
                     <h5>Menu Paling Laris</h5>
 
-                    <h2>{{ $menuPalingLaris->menu->nama }}</h2>
-                    <p>{{ $menuPalingLaris->jumlah }} Unit</p>
+                    <h2>{{ $menuPalingLaris->menu->nama ?? 'Tiada Data' }}</h2>
+                    <p>{{ $menuPalingLaris->jumlah ?? '0' }} Unit</p>
 
                 </div>
             </div>
     </div>
 
-
 </div>
-
-
-
-
 
 <br> 
 </div>
