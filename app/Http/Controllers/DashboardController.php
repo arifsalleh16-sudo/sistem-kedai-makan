@@ -58,7 +58,7 @@ class DashboardController extends Controller
         Carbon::today()
         )->sum('kuantiti');
 
-        $topMenus = Sale::selectRaw('menu_id, SUM(quantity) as jumlah')
+        $topMenus = Sale::selectRaw('menu_id, SUM(kuantiti) as jumlah')
          ->groupBy('menu_id')
          ->orderByDesc('jumlah')
          ->take(5)
