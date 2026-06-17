@@ -64,7 +64,7 @@ class DashboardController extends Controller
          ->take(5)
          ->get();
 
-         $salesByDate = Sale::selectRaw('DATE(created_at) as tarikh, SUM(total_harga) as jumlah')
+         $salesByDate = Sale::selectRaw('DATE(created_at) as tarikh, SUM(jumlahSales) as jumlah')
         ->groupBy('tarikh')
         ->orderBy('tarikh')
         ->get();
