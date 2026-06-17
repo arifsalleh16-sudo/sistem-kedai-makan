@@ -13,9 +13,13 @@
 
     <h1>Rekod Jualan</h1>
 
+    <a href="/dashboard" class="btn btn-primary mb-3">
+        Kembali ke Dasboard
+    </a>
     <a href="/sales/create" class="btn btn-success mb-3">
         Rekod Jualan Baru
     </a>
+    
 
     <form method="GET" action="/sales" class="mb-3">
 
