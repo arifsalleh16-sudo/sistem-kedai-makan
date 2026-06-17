@@ -2,6 +2,30 @@
 
 @section('content')
 
+<div class="grid md:grid-cols-4 gap-4 mb-6">
+
+    <div class="bg-white p-5 rounded-xl shadow">
+        <p class="text-slate-500">Jumlah Menu</p>
+        <h2 class="text-3xl font-bold">{{ $jumlahMenu }}</h2>
+    </div>
+
+    <div class="bg-white p-5 rounded-xl shadow">
+        <p class="text-slate-500">Makanan</p>
+        <h2 class="text-3xl font-bold">{{ $jumlahMenuMakanan }}</h2>
+    </div>
+
+    <div class="bg-white p-5 rounded-xl shadow">
+        <p class="text-slate-500">Minuman</p>
+        <h2 class="text-3xl font-bold">{{ $jumlahMenuMinuman }}</h2>
+    </div>
+
+    <div class="bg-white p-5 rounded-xl shadow">
+        <p class="text-slate-500">Dessert</p>
+        <h2 class="text-3xl font-bold">{{ $jumlahMenuDessert }}</h2>
+    </div>
+
+</div>
+
 <div class="bg-white rounded-2xl shadow p-6">
 
     <div class="flex justify-between items-center mb-6">

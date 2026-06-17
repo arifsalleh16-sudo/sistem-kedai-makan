@@ -1,42 +1,137 @@
-<h1>Tambah Menu</h1>
+@extends('layouts.app')
 
-@if ($errors->any())
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-@endif
+@section('content')
 
-<form method="POST" action="/menu">
-    @csrf
+<div class="max-w-2xl mx-auto">
 
-    <label>Nama Menu:</label>
-    <input type="text" name="nama">
+    <div class="bg-white rounded-2xl shadow p-8">
 
-    <br><br>
+        <div class="mb-8">
 
-    <label>Harga:</label>
-    <input type="number" step="0.01" name="harga">
+            <h1 class="text-3xl font-bold text-slate-800">
+                Tambah Menu Baru
+            </h1>
 
-    <br><br>
+            <p class="text-slate-500 mt-2">
+                Tambah menu makanan, minuman atau dessert
+            </p>
 
-    <label>Kategori</label>
+        </div>
 
-    <select name="category_id">
+        <form action="/menu" method="POST">
 
-    @foreach($categories as $category)
+            @csrf
 
-        <option value="{{ $category->id }}">
-            {{ $category->nama }}
-        </option>
+            <!-- Nama Menu -->
 
-    @endforeach
+            <div class="mb-5">
 
-    </select>
+                <label class="block mb-2 font-medium text-slate-700">
+                    Nama Menu
+                </label>
 
-    <br><br>
+                <input
+                    type="text"
+                    name="nama"
+                    value="{{ old('nama') }}"
+                    class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    placeholder="Contoh: Nasi Lemak">
 
-    <button type="submit">Tambah</button>
-</form>
+                @error('nama')
+                    <p class="text-red-500 text-sm mt-1">
+                        {{ $message }}
+                    </p>
+                @enderror
 
+            </div>
+
+            <!-- Harga -->
+
+            <div class="mb-5">
+
+                <label class="block mb-2 font-medium text-slate-700">
+                    Harga (RM)
+                </label>
+
+                <input
+                    type="number"
+                    step="0.01"
+                    name="harga"
+                    value="{{ old('harga') }}"
+                    class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    placeholder="10.50">
+
+                @error('harga')
+                    <p class="text-red-500 text-sm mt-1">
+                        {{ $message }}
+                    </p>
+                @enderror
+
+            </div>
+
+            <!-- Kategori -->
+
+            <div class="mb-8">
+
+                <label class="block mb-2 font-medium text-slate-700">
+                    Kategori
+                </label>
+
+                <select
+                    name="category_id"
+                    class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+
+                    <option value="">
+                        Pilih Kategori
+                    </option>
+
+                    @foreach($categories as $category)
+
+                        <option
+                            value="{{ $category->id }}"
+                            {{ old('category_id') == $category->id ? 'selected' : '' }}>
+
+                            {{ $category->nama }}
+
+                        </option>
+
+                    @endforeach
+
+                </select>
+
+                @error('category_id')
+                    <p class="text-red-500 text-sm mt-1">
+                        {{ $message }}
+                    </p>
+                @enderror
+
+            </div>
+
+            <!-- Button -->
+
+            <div class="flex gap-3">
+
+                <button
+                    type="submit"
+                    class="bg-green-600 text-white px-6 py-3 rounded-xl hover:bg-green-700 transition">
+
+                    Simpan Menu
+
+                </button>
+
+                <a href="/menu"
+                   class="bg-slate-200 text-slate-700 px-6 py-3 rounded-xl hover:bg-slate-300 transition">
+
+                    Kembali
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+@endsection
