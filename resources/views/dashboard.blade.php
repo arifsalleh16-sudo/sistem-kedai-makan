@@ -1,199 +1,173 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dashboard</title>
+    <title>Dashboard Kedai Makan</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    @vite(['resources/css/app.css','resources/js/app.js'])
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
+<body class="bg-slate-100">
 
-<div class="container mt-5">
+<div class="max-w-7xl mx-auto p-6">
 
-    <h1 class="mb-4">
-        Dashboard Kedai Makan
-    </h1>
+    <div class="mb-8">
+        <h1 class="text-4xl font-bold text-slate-800">
+            Dashboard Kedai Makan
+        </h1>
 
-    <a href="/menu" class="btn btn-primary mb-3">
-        Pergi ke Menu
-    </a>
-
-    <a href="/sales" class="btn btn-primary mb-3">
-        Pergi ke Sales
-    </a>
-
-    <div class="row">
-
-        <div class="col-md-4">
-
-            <div class="card">
-
-                <div class="card-body">
-
-                    <h5>Jumlah Menu</h5>
-
-                    <h2>{{ $jumlahMenu }}</h2>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="col-md-4">
-
-            <div class="card">
-
-                <div class="card-body">
-
-                    <h5>Jumlah Pengguna</h5>
-
-                    <h2>{{ $jumlahUser }}</h2>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="col-md-4">
-
-            <div class="card">
-
-                <div class="card-body">
-
-                    <h5>Jumlah Menu Makanan</h5>
-
-                    <h2>{{ $jumlahMenuMakanan }}</h2>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="col-md-4">
-
-            <div class="card">
-
-                <div class="card-body">
-
-                    <h5>Jumlah Menu Minuman</h5>
-
-                    <h2>{{ $jumlahMenuMinuman }}</h2>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="col-md-4">
-
-            <div class="card">
-
-                <div class="card-body">
-
-                    <h5>Jumlah Menu Dessert</h5>
-
-                    <h2>{{ $jumlahMenuDessert }}</h2>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="col-md-4">
-
-            <div class="card">
-
-                <div class="card-body">
-
-                    <h5>Menu Makanan Paling Mahal</h5>
-
-                    <h2>{{ $menuMakananPalingMahal->nama }}</h2>
-
-                </div>
-
-            </div>
-
-        </div>
-
-         <div class="col-md-4">
-
-            <div class="card">
-
-                <div class="card-body">
-
-                    <h5>Menu Makanan Paling Murah</h5>
-
-                    <h2>{{ $menuMakananPalingMurah->nama }}</h2>
-
-                </div>
-
-            </div>
-        </div>
-            <div class="col-md-4">
-
-            <div class="card">
-
-                <div class="card-body">
-
-                    <h5>Total Nilai Semua Menu</h5>
-
-                    <h2>RM {{ number_format($jumlahNilaiSemuaMenu, 0, ',', '.') }}</h2>
-
-                </div>
-            </div>
-              
-        </div>
-        <div class="col-md-4">
-
-            <div class="card">
-
-                <div class="card-body">
-
-                    <h5>Jumlah Pendapatan Kesuluruhan</h5>
-
-                    <h2>RM {{ number_format($jumlahSales, 0, ',', '.') }}</h2>
-
-                </div>
-            </div>
+        <p class="text-slate-500">
+            Ringkasan prestasi sistem
+        </p>
     </div>
-    <div class="col-md-4">
 
-            <div class="card">
+    <!-- Statistics -->
 
-                <div class="card-body">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
 
-                    <h5>Jumlah Item Terjual</h5>
+        <div class="bg-white p-6 rounded-2xl shadow">
+            <p class="text-slate-500">
+                Pendapatan
+            </p>
 
-                    <h2>{{ $jumlahItemTerjual}}</h2>
+            <h2 class="text-3xl font-bold mt-2">
+                RM {{ number_format($jumlahSales) }}
+            </h2>
+        </div>
 
-                </div>
-            </div>
+        <div class="bg-white p-6 rounded-2xl shadow">
+            <p class="text-slate-500">
+                Item Terjual
+            </p>
+
+            <h2 class="text-3xl font-bold mt-2">
+                {{ $jumlahItemTerjual }}
+            </h2>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow">
+            <p class="text-slate-500">
+                Jumlah Menu
+            </p>
+
+            <h2 class="text-3xl font-bold mt-2">
+                {{ $jumlahMenu }}
+            </h2>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow">
+            <p class="text-slate-500">
+                Pengguna
+            </p>
+
+            <h2 class="text-3xl font-bold mt-2">
+                {{ $jumlahUser }}
+            </h2>
+        </div>
+
     </div>
-    <div class="col-md-4">
 
-            <div class="card">
+    <!-- Chart + Top Menu -->
 
-                <div class="card-body">
+    <div class="grid lg:grid-cols-3 gap-6 mb-8">
 
-                    <h5>Menu Paling Laris</h5>
+        <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow">
 
-                    <h2>{{ $menuPalingLaris->menu->nama}}</h2>
-                    <p>{{ $menuPalingLaris->jumlah}} Unit</p>
+            <h3 class="text-xl font-semibold mb-4">
+                Jualan Mengikut Hari
+            </h3>
 
-                </div>
-            </div>
+            <canvas id="salesChart"></canvas>
+
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow">
+
+            <h3 class="text-xl font-semibold mb-4">
+                Menu Paling Laris
+            </h3>
+
+            <h2 class="text-3xl font-bold">
+                {{ $menuPalingLaris->menu->nama }}
+            </h2>
+
+            <p class="text-slate-500 mt-2">
+                {{ $menuPalingLaris->jumlah }} Unit Terjual
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Top Menu Table -->
+
+    <div class="bg-white rounded-2xl shadow p-6">
+
+        <h3 class="text-xl font-semibold mb-4">
+            Top Menu Terlaris
+        </h3>
+
+        <table class="w-full">
+
+            <thead>
+
+                <tr class="border-b">
+
+                    <th class="text-left py-3">#</th>
+                    <th class="text-left py-3">Nama Menu</th>
+                    <th class="text-left py-3">Jumlah Jualan</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @foreach($topMenus as $menu)
+
+                <tr class="border-b hover:bg-slate-50">
+
+                    <td class="py-3">
+                        {{ $loop->iteration }}
+                    </td>
+
+                    <td class="py-3">
+                        {{ $menu->menu->nama }}
+                    </td>
+
+                    <td class="py-3">
+                        {{ $menu->jumlah }}
+                    </td>
+
+                </tr>
+
+                @endforeach
+
+            </tbody>
+
+        </table>
+
     </div>
 
 </div>
 
-<br> 
-</div>
+<script>
 
-</div>
+new Chart(
+    document.getElementById('salesChart'),
+    {
+        type: 'bar',
+        data: {
+            labels: ['Isnin','Selasa','Rabu','Khamis','Jumaat'],
+            datasets: [{
+                label: 'Jualan',
+                data: [50,40,70,20,78]
+            }]
+        }
+    }
+);
+
+</script>
 
 </body>
 </html>

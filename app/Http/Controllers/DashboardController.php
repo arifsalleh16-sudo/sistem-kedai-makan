@@ -58,6 +58,12 @@ class DashboardController extends Controller
         Carbon::today()
         )->sum('kuantiti');
 
+        $topMenus = Sale::selectRaw('menu_id, SUM(quantity) as jumlah')
+         ->groupBy('menu_id')
+         ->orderByDesc('jumlah')
+         ->take(5)
+         ->get();
+
         return view('dashboard', [
             'jumlahMenu' => $jumlahMenu,
             'jumlahUser' => $jumlahUser,
@@ -73,5 +79,14 @@ class DashboardController extends Controller
             'jualanHariIni' => $jualanHariIni,
             'itemTerjualHariIni' => $itemTerjualHariIni
         ]);
+
+        return view('dashboard', compact(
+          'jumlahSales',
+          'jumlahItemTerjual',
+          'jumlahMenu',
+          'jumlahUser',
+          'menuPalingLaris',
+          'topMenus'
+        ));
     }
 }
