@@ -15,6 +15,7 @@ public function index(Request $request)
     $search = $request->search;
 
     $menus = Menu::where(
+        'is_active', true,
         'nama',
         'like',
         "%{$search}%"
@@ -89,7 +90,8 @@ public function destroy($id)
 {
     $menu = Menu::find($id);
 
-    $menu->delete();
+    $menu->is_active = false;
+    $menu->save();
 
     return redirect('/menu');
 }

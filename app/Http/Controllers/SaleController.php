@@ -58,8 +58,10 @@ class SaleController extends Controller
     public function store(Request $request)
     {
     Sale::create([
-        'menu_id' => $request->menu_id,
-        'kuantiti' => $request->kuantiti,
+        'menu_id' => $menu->id,
+        'nama_menu' => $menu->nama,
+        'harga_semasa' => $menu->harga,
+        'kuantiti' => $request->kuantiti
     ]);
 
     return redirect('/sales');
