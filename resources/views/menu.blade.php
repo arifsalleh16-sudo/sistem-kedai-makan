@@ -80,13 +80,9 @@
                     <td class="p-4">
 
                         @if($menu->is_active)
-                            <span class="px-3 py-1 rounded-full bg-green-100 text-green-700 text-sm">
-                                Aktif
-                            </span>
+                            <span class="badge bg-success">Aktif</span>
                         @else
-                            <span class="px-3 py-1 rounded-full bg-red-100 text-red-700 text-sm">
-                                Tidak Aktif
-                            </span>
+                            <span class="badge bg-secondary">Tidak Aktif</span>
                         @endif
 
                     </td>

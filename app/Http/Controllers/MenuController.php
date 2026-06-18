@@ -14,12 +14,13 @@ public function index(Request $request)
 {
     $search = $request->search;
 
-    $menus = Menu::where('is_active', 1)
-        ->when($search, function ($query) use ($search) {
-            $query->where('nama', 'like', "%{$search}%");
-        })
-        ->get();
+    //$menus = Menu::where('is_active', 1)
+    //    ->when($search, function ($query) use ($search) {
+    //        $query->where('nama', 'like', "%{$search}%");
+    //    })
+    //    ->get();
 
+    $menus = Menu::all();
     return view('menu', [
         'menus' => $menus
     ]);
