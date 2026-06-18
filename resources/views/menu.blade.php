@@ -44,6 +44,7 @@
                     <th class="text-left p-4">Nama Menu</th>
                     <th class="text-left p-4">Kategori</th>
                     <th class="text-left p-4">Harga</th>
+                    <th class="text-left p-4">Status</th>
                     <th class="text-center p-4">Tindakan</th>
 
                 </tr>
@@ -76,22 +77,41 @@
 
                     </td>
 
+                    <td class="p-4">
+
+                        @if($menu->is_active)
+                            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">
+                                Aktif
+                            </span>
+                        @else
+                            <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm">
+                                Tidak Aktif
+                            </span>
+                        @endif
+
                     <td class="p-4 text-center">
 
                         <a href="/menu/{{ $menu->id }}/edit"
                            class="bg-yellow-500 text-white px-3 py-2 rounded-lg">
                             Edit
                         </a>
+                        <form action="/menu/{{ $menu->id }}" method="POST" style="display:inline;">
+                         @csrf
+                         @method('DELETE')
 
-                        <form action="/menu/{{ $menu->id }}" method="POST" class="inline-block">
-                            @csrf
-                            @method('DELETE')
-                            <button
-                                class="bg-red-500 text-white px-3 py-2 rounded-lg ml-2">
-                                Delete
-                            </button>
+                          @if($menu->is_active)
+
+                         <button class="btn btn-warning btn-sm" onclick="return confirm('Nyahaktif menu ini?')">
+                         Nyahaktif
+                         </button>
+
+                         @else
+
+                        <button class="btn btn-success btn-sm" onclick="return confirm('Aktifkan semula menu ini?')">
+                        Aktifkan
+                        </button>
+                         @endif
                         </form>
-
                     </td>
 
                 </tr>

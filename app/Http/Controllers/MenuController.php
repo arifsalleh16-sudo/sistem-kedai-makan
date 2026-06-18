@@ -15,7 +15,7 @@ public function index(Request $request)
     $search = $request->search;
 
     $menus = Menu::where(
-        'is_active', true,
+        'is_active', 1,
         'nama',
         'like',
         "%{$search}%"
@@ -88,9 +88,10 @@ public function update(Request $request, $id)
 
 public function destroy($id)
 {
-    $menu = Menu::find($id);
+    $menu = Menu::findOrFail($id);
 
-    $menu->is_active = false;
+    $menu->is_active = !$menu->is_active;
+
     $menu->save();
 
     return redirect('/menu');
