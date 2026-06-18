@@ -93,9 +93,9 @@
 
                     <td class="p-4 text-center">
 
-                        <form action="/menu/{{ $menu->id }}" method="POST" style="display:inline;">
+                        <form action="/menu/{{ $menu->id }}/toggle-status" method="POST" style="display:inline;">
                          @csrf
-                         @method('DELETE')
+                         @method('PATCH')
 
                           @if($menu->is_active)
 
@@ -115,7 +115,7 @@
                            class="bg-yellow-500 text-white px-3 py-2 rounded-lg">
                             Kemaskini
                         </a>
-                        
+
                     </td>
 
                 </tr>

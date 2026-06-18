@@ -85,6 +85,15 @@ public function update(Request $request, $id)
     return redirect('/menu');
 }
 
+public function toggleStatus(Menu $menu)
+{
+    $menu->is_active = !$menu->is_active;
+
+    $menu->save();
+
+    return redirect('/menu');
+}
+
 public function destroy($id)
 {
     $menu = Menu::findOrFail($id);
