@@ -29,16 +29,6 @@
 
     </div>
 
-    <form method="GET" class="mb-6">
-
-        <input
-            type="text"
-            name="search"
-            placeholder="Cari menu..."
-            class="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
-
-    </form>
-
     <div class="overflow-x-auto">
 
         <table id="menuTable" class="w-full">
@@ -134,27 +124,30 @@
 
 <script>
 
-new DataTable('#menuTable', {
+document.addEventListener('DOMContentLoaded', function () {
 
-    pageLength: 5,
+    console.log('DataTable:', typeof DataTable);
 
-    lengthMenu: [
-        [5,10,25,50],
-        [5,10,25,50]
-    ],
+    if (typeof DataTable !== 'undefined') {
 
-    language: {
+        new DataTable('#menuTable', {
+            pageLength: 5,
 
-        search: "Cari:",
+            lengthMenu: [
+                [5,10,25,50],
+                [5,10,25,50]
+            ],
 
-        lengthMenu: "Papar _MENU_ rekod",
-
-        info: "Paparan _START_ hingga _END_ daripada _TOTAL_ rekod",
-
-        paginate: {
-            previous: "Sebelum",
-            next: "Seterusnya"
-        }
+            language: {
+                search: "Cari:",
+                lengthMenu: "Papar _MENU_ rekod",
+                info: "Paparan _START_ hingga _END_ daripada _TOTAL_ rekod",
+                paginate: {
+                    previous: "Sebelum",
+                    next: "Seterusnya"
+                }
+            }
+        });
 
     }
 
