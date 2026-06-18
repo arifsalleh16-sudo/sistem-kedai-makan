@@ -9,6 +9,7 @@ class Menu extends Model
     protected $fillable = [
         'nama',
         'harga',
+        'is_active',
         'category_id'
     ];
 
