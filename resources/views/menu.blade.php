@@ -29,6 +29,29 @@
 
     </div>
 
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+
+    <div class="bg-white rounded-3xl shadow-lg p-8 border border-slate-100">
+        <p class="text-slate-500">Jumlah Menu</p>
+        <h2 class="text-3xl font-bold">{{ $menus->count() }}</h2>
+    </div>
+
+    <div class="bg-white rounded-3xl shadow-lg p-8 border border-slate-100">
+        <p class="text-slate-500">Menu Aktif</p>
+        <h2 class="text-3xl font-bold text-green-600">
+            {{ $menus->where('is_active', true)->count() }}
+        </h2>
+    </div>
+
+    <div class="bg-white rounded-3xl shadow-lg p-8 border border-slate-100">
+        <p class="text-slate-500">Kategori</p>
+        <h2 class="text-3xl font-bold">
+            {{ $menus->groupBy('category_id')->count() }}
+        </h2>
+    </div>
+
+    </div>
+
     <div class="overflow-x-auto">
 
         <table id="menuTable" class="w-full">
@@ -51,15 +74,19 @@
 
                 @foreach($menus as $menu)
 
-                <tr class="border-b hover:bg-slate-50">
+                <tr class="hover:bg-slate-50 transition">
 
                     <td class="p-4 font-medium">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">
+
                         {{ $menu->nama }}
+
+                        </span>
                     </td>
 
-                    <td class="p-4">
+                    <td class="p-4 font-medium">
 
-                        <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">
 
                             {{ $menu->category->nama }}
 
@@ -67,9 +94,13 @@
 
                     </td>
 
-                    <td class="p-4 font-semibold">
+                    <td class="p-4 font-bold text-green-600">
+
+                        <span class="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-sm">
 
                         RM {{ number_format($menu->harga,2) }}
+
+                        </span>
 
                     </td>
 
@@ -104,7 +135,7 @@
                         </form>
 
                          <a href="/menu/{{ $menu->id }}/edit"
-                           class="px-3 py-1 rounded-full bg-blue-500 text-white text-sm">
+                           class="inline-flex items-center px-3 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
                             Kemaskini
                         </a>
 
