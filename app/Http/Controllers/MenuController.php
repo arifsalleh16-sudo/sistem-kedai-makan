@@ -73,8 +73,10 @@ public function edit($id)
     ]);
 }
 
-public function update(Request $request, Menu $menu)
+public function update(Request $request, $id)
 {
+    $menu = Menu::find($id);
+
     $request->validate([
         'nama' => 'required',
         'harga' => 'required|numeric',
@@ -90,6 +92,7 @@ public function update(Request $request, Menu $menu)
     return redirect('/menu')
         ->with('success', 'Menu berjaya dikemaskini');
 }
+
 
 public function toggleStatus(Menu $menu)
 {
