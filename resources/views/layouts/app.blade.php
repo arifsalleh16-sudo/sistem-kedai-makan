@@ -57,22 +57,21 @@
                     Sistem Pengurusan Kedai Makan
                 </h2>
 
-                <div>
+                <div class="flex items-center gap-4">
 
-                    <span class="text-slate-600">
-                        Admin
-                    </span>
+                <span class="text-slate-600 font-medium">
+                     {{ Auth::user()->name }}
+                </span>
 
-                    <div class="mt-3">
-                      <form method="POST" action="{{ route('logout') }}">
-                       @csrf
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
 
-                      <button class="btn btn-outline-danger w-100"> 🚪 Logout </button>
-                     </form>
-                   
-                    </div>
+                    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg">
+                        Logout
+                    </button>
+                </form>
 
-                </div>
+            </div>
 
             </div>
 
