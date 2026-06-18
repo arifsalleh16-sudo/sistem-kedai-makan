@@ -63,6 +63,15 @@
                         Admin
                     </span>
 
+                    <div class="mt-3">
+                      <form method="POST" action="{{ route('logout') }}">
+                       @csrf
+
+                      <button class="btn btn-outline-danger w-100"> 🚪 Logout </button>
+                     </form>
+                   
+                    </div>
+
                 </div>
 
             </div>
