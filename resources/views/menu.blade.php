@@ -131,7 +131,6 @@
     </div>
 
 </div>
-@endsection
 
 <script>
 
@@ -162,3 +161,6 @@ new DataTable('#menuTable', {
 });
 
 </script>
+
+@endsection
+
