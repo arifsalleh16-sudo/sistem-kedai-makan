@@ -22,10 +22,12 @@ class SaleController extends Controller
     {
 
     $sales = Sale::all();
+
     $jumlahSales = 0;
+
       foreach ($sales as $sale) {
 
-        $jumlahSales += $sale->menu->harga * $sale->kuantiti;
+        $jumlahSales += ($sale->menu?->harga ?? 0) * $sale->kuantiti;
 
         }
 
