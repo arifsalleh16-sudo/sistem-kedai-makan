@@ -80,21 +80,19 @@
                     <td class="p-4">
 
                         @if($menu->is_active)
-                            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">
+                            <span class="px-3 py-1 rounded-full bg-green-100 text-green-700 text-sm">
                                 Aktif
                             </span>
                         @else
-                            <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm">
+                            <span class="px-3 py-1 rounded-full bg-red-100 text-red-700 text-sm">
                                 Tidak Aktif
                             </span>
                         @endif
 
+                    </td>
+
                     <td class="p-4 text-center">
 
-                        <a href="/menu/{{ $menu->id }}/edit"
-                           class="bg-yellow-500 text-white px-3 py-2 rounded-lg">
-                            Edit
-                        </a>
                         <form action="/menu/{{ $menu->id }}" method="POST" style="display:inline;">
                          @csrf
                          @method('DELETE')
@@ -112,6 +110,12 @@
                         </button>
                          @endif
                         </form>
+
+                         <a href="/menu/{{ $menu->id }}/edit"
+                           class="bg-yellow-500 text-white px-3 py-2 rounded-lg">
+                            Kemaskini
+                        </a>
+                        
                     </td>
 
                 </tr>

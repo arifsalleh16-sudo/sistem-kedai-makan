@@ -29,7 +29,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/menu/{id}/edit', [MenuController::class, 'edit']);
     Route::put('/menu/{id}', [MenuController::class, 'update']);
 
-    Route::delete('/menu/{id}', [MenuController::class, 'destroy']);
+    Route::patch('/menu/{menu}/toggle-status', [MenuController::class, 'toggleStatus']);
 
 });
 
