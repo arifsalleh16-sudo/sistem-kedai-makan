@@ -41,7 +41,7 @@
 
     <div class="overflow-x-auto">
 
-        <table class="w-full">
+        <table id="menuTable" class="w-full">
 
             <thead>
 
@@ -132,3 +132,33 @@
 
 </div>
 @endsection
+
+<script>
+
+new DataTable('#menuTable', {
+
+    pageLength: 5,
+
+    lengthMenu: [
+        [5,10,25,50],
+        [5,10,25,50]
+    ],
+
+    language: {
+
+        search: "Cari:",
+
+        lengthMenu: "Papar _MENU_ rekod",
+
+        info: "Paparan _START_ hingga _END_ daripada _TOTAL_ rekod",
+
+        paginate: {
+            previous: "Sebelum",
+            next: "Seterusnya"
+        }
+
+    }
+
+});
+
+</script>
