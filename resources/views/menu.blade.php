@@ -80,9 +80,9 @@
                     <td class="p-4">
 
                         @if($menu->is_active)
-                            <span class="badge bg-success">Aktif</span>
+                            <span class="px-3 py-1 rounded-full bg-green-100 text-green-700 text-sm">Aktif</span>
                         @else
-                            <span class="badge bg-secondary">Tidak Aktif</span>
+                            <span class="px-3 py-1 rounded-full bg-red-100 text-red-700 text-sm">Tidak Aktif</span>
                         @endif
 
                     </td>
@@ -95,20 +95,20 @@
 
                           @if($menu->is_active)
 
-                         <button class="btn btn-warning btn-sm" onclick="return confirm('Nyahaktif menu ini?')">
+                         <button class="px-3 py-1 rounded-full bg-yellow-500 text-yellow-700 text-sm" onclick="return confirm('Nyahaktif menu ini?')">
                          Nyahaktif
                          </button>
 
                          @else
 
-                        <button class="btn btn-success btn-sm" onclick="return confirm('Aktifkan semula menu ini?')">
+                        <button class="px-3 py-1 rounded-full bg-green-500 text-green-700 text-sm" onclick="return confirm('Aktifkan semula menu ini?')">
                         Aktifkan
                         </button>
                          @endif
                         </form>
 
                          <a href="/menu/{{ $menu->id }}/edit"
-                           class="bg-yellow-500 text-white px-3 py-2 rounded-lg">
+                           class="px-3 py-1 rounded-full bg-blue-500 text-white text-sm">
                             Kemaskini
                         </a>
 
