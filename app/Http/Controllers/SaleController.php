@@ -9,6 +9,9 @@ use Carbon\Carbon;
 
 class SaleController extends Controller
 {
+
+    $sales = Sale::with(['menu'])->get();
+
     public function create()
     {
         $menus = Menu::all();

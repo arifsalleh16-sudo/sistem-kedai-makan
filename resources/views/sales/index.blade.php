@@ -1,119 +1,199 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Sales</title>
+@extends('layouts.app')
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+@section('content')
 
+<div class="space-y-6">
 
+```
+<!-- Header -->
 
-<div class="container mt-5">
+<div class="flex justify-between items-center">
 
-    <h1>Rekod Jualan</h1>
+    <div>
 
-    <a href="/dashboard" class="btn btn-primary mb-3">
-        Kembali ke Dasboard
-    </a>
-    <a href="/sales/create" class="btn btn-success mb-3">
-        Rekod Jualan Baru
-    </a>
-    
+        <h1 class="text-3xl font-bold text-slate-800">
+            Rekod Jualan
+        </h1>
 
-    <form method="GET" action="/sales" class="mb-3">
-
-    <div class="row">
-
-        <div class="col-md-4">
-
-            <input
-                type="text"
-                 name="search"
-                value="{{ request('search') }}"
-                class="form-control"
-                placeholder="Cari menu..."
->
-
-        </div>
-
-        <div class="col-md-2">
-
-            <button class="btn btn-primary">
-                Cari
-            </button>
-
-        </div>
+        <p class="text-slate-500">
+            Pantau semua transaksi jualan kedai
+        </p>
 
     </div>
 
-</form>
+    <a href="/sales/create"
+       class="bg-green-600 text-white px-5 py-3 rounded-xl hover:bg-green-700 transition">
 
-    <table class="table table-bordered table-striped">
+        + Rekod Jualan Baru
+
+    </a>
+
+</div>
+
+<!-- Statistik -->
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+    <div class="bg-white p-6 rounded-2xl shadow">
+
+        <p class="text-slate-500">
+            Jumlah Rekod
+        </p>
+
+        <h2 class="text-3xl font-bold">
+            {{ $sales->count() }}
+        </h2>
+
+    </div>
+
+    <div class="bg-white p-6 rounded-2xl shadow">
+
+        <p class="text-slate-500">
+            Item Terjual
+        </p>
+
+        <h2 class="text-3xl font-bold">
+            {{ $sales->sum('kuantiti') }}
+        </h2>
+
+    </div>
+
+    <div class="bg-white p-6 rounded-2xl shadow">
+
+        <p class="text-slate-500">
+            Jumlah Jualan
+        </p>
+
+        <h2 class="text-3xl font-bold text-green-600">
+
+            RM {{ number_format(
+                $sales->sum(function($sale){
+                    return ($sale->menu?->harga ?? 0) * $sale->kuantiti;
+                }),
+                2
+            ) }}
+
+        </h2>
+
+    </div>
+
+</div>
+
+<!-- Jadual -->
+
+<div class="bg-white rounded-3xl shadow-lg p-6">
+
+    <table id="salesTable" class="w-full">
 
         <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nama Menu</th>
-                <th>Harga</th>
-                <th>Kuantiti</th>
-                <th>Tarikh</th>
+
+            <tr class="bg-slate-100">
+
+                <th class="text-left p-4">
+                    Nama Menu
+                </th>
+
+                <th class="text-left p-4">
+                    Harga
+                </th>
+
+                <th class="text-left p-4">
+                    Kuantiti
+                </th>
+
+                <th class="text-left p-4">
+                    Jumlah
+                </th>
+
+                <th class="text-left p-4">
+                    Tarikh
+                </th>
+
             </tr>
+
         </thead>
 
         <tbody>
 
-        @foreach($sales as $sale)
+            @foreach($sales as $sale)
 
-            <tr>
+            <tr class="hover:bg-slate-50 transition">
 
-                <td>{{ $sale->id }}</td>
+                <td class="p-4 font-medium">
 
-                <td>{{ $sale->menu?->nama ?? 'Menu Dipadam' }}</td>
+                    {{ $sale->menu?->nama ?? 'Menu Dipadam' }}
 
-                <td>RM {{ number_format($sale->menu?->harga ?? 0, 2) }}</td>
+                </td>
 
-                <td>{{ $sale->kuantiti }}</td>
+                <td class="p-4">
 
-                <td>{{ $sale->created_at->format('d M Y, H:i') }}</td>
+                    RM {{ number_format($sale->menu?->harga ?? 0, 2) }}
+
+                </td>
+
+                <td class="p-4">
+
+                    {{ $sale->kuantiti }}
+
+                </td>
+
+                <td class="p-4 font-bold text-green-600">
+
+                    RM {{
+                        number_format(
+                            ($sale->menu?->harga ?? 0) * $sale->kuantiti,
+                            2
+                        )
+                    }}
+
+                </td>
+
+                <td class="p-4 text-slate-500">
+
+                    {{ $sale->created_at->format('d M Y, H:i') }}
+
+                </td>
 
             </tr>
 
-        @endforeach
+            @endforeach
 
-        </tbody>
-
-    </table>
-
-    <table class="table table-bordered table-striped">
-
-        <thead>
-            <tr>
-                <th>Tarikh</th>
-                <th>Jumlah Jualan Hari Ini</th>
-                <th>Jumlah Item Terjual Hari Ini</th>
-                <th>Jumlah Jualan</th>
-            </tr>
-        </thead>
-
-        <tbody>
-        @foreach($salesByDate as $tarikh => $sales)
-
-    <tr>
-             <td>{{ \Carbon\Carbon::parse($tarikh)->format('d M Y') }}</td>
-
-            <td>{{ $sales->count() }}</td>
-
-            <td>{{ $sales->sum('kuantiti') }}</td>
-
-            <td>RM {{number_format($sales->sum(function($sale) {return ($sale->menu?->harga ?? 0) * $sale->kuantiti;}),2)}}</td>
-    </tr>
-        @endforeach
         </tbody>
 
     </table>
 
 </div>
+```
 
-</body>
-</html>
+</div>
+
+<script>
+
+$(document).ready(function () {
+
+    $('#salesTable').DataTable({
+
+        pageLength: 10,
+
+        language: {
+
+            search: "Cari:",
+
+            lengthMenu: "Papar _MENU_ rekod",
+
+            info: "Paparan _START_ hingga _END_ daripada _TOTAL_ rekod",
+
+            paginate: {
+                previous: "Sebelum",
+                next: "Seterusnya"
+            }
+
+        }
+
+    });
+
+});
+
+</script>
+
+@endsection
