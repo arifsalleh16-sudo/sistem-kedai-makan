@@ -33,7 +33,12 @@
 
             <a href="/pos"
                class="block p-3 rounded-lg hover:bg-slate-800 mb-2">
-                Order POS
+                POS
+            </a>
+
+            <a href="/orders"
+               class="block p-3 rounded-lg hover:bg-slate-800 mb-2">
+                Orders
             </a>
 
             <a href="/menu"
