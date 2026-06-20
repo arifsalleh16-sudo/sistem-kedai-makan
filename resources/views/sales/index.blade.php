@@ -20,13 +20,6 @@
 
     </div>
 
-    <a href="/sales/create"
-       class="bg-green-600 text-white px-5 py-3 rounded-xl hover:bg-green-700 transition">
-
-        + Rekod Jualan Baru
-
-    </a>
-
 </div>
 
 <!-- Statistik -->
