@@ -55,7 +55,12 @@ Route::get('/sales', [SaleController::class, 'index']);
 Route::post('/sales', [SaleController::class, 'store']);
 Route::get('/sales/create', [SaleController::class, 'create']);
 
+Route::get('/pos', [App\Http\Controllers\PosController::class, 'index'])->name('pos.index');
+Route::post('/pos', [App\Http\Controllers\PosController::class, 'store'])->name('pos.store');
 
+Route::get('/receipt/{id}',
+    [PosController::class, 'receipt']
+)->name('receipt');
 
 
 require __DIR__.'/auth.php';
