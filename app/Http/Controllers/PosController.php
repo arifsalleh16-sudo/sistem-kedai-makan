@@ -32,6 +32,7 @@ class PosController extends Controller
     }
 
     $order = Order::create([
+        'no_resit' => 'RESIT-' . time(),
         'total' => $total
     ]);
 

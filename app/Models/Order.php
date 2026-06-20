@@ -10,7 +10,7 @@ class Order extends Model
 {
     protected $fillable = [
     'no_resit',
-    'jumlah_harga'
+    'total'
     ];
 
     public function items()
