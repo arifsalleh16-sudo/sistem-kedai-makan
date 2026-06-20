@@ -64,5 +64,4 @@ Route::get('/receipt/{id}',
     [PosController::class, 'receipt']
 )->name('receipt');
 
-
 require __DIR__.'/auth.php';
