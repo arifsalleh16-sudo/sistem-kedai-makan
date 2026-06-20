@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="grid grid-cols-12 gap-6">
 
-<div class="col-lg-8">
+    <div class="col-span-12 lg:col-span-8">
 
     <!-- MAKANAN -->
     <h3 class="text-2xl font-bold mb-4">
@@ -13,18 +14,18 @@
 
         @foreach($menus->where('category.nama', 'Makanan') as $menu)
 
-        <div class="bg-white rounded-2xl shadow p-5 hover:shadow-lg transition">
+        <div class="bg-white rounded-xl shadow p-3 hover:shadow-lg hover:scale-105 transition cursor-pointer">
 
-            <h4 class="font-bold text-lg">
+            <h4 class="font-semibold text-sm">
                 {{ $menu->nama }}
             </h4>
 
-            <p class="text-green-600 font-bold text-xl my-3">
+            <p class="text-green-600 font-bold text-lg my-2">
                 RM {{ number_format($menu->harga,2) }}
             </p>
 
             <button
-                class="w-full bg-blue-600 text-white py-3 rounded-xl tambah-menu"
+                class="w-full bg-blue-600 text-white py-2 rounded-lg text-sm tambah-menu"
                 data-id="{{ $menu->id }}"
                 data-nama="{{ $menu->nama }}"
                 data-harga="{{ $menu->harga }}">
@@ -46,18 +47,18 @@
 
         @foreach($menus->where('category.nama', 'Minuman') as $menu)
 
-        <div class="bg-white rounded-2xl shadow p-5 hover:shadow-lg transition">
+        <div class="bg-white rounded-xl shadow p-3 hover:shadow-lg hover:scale-105 transition cursor-pointer">
 
-            <h4 class="font-bold text-lg">
+            <h4 class="font-semibold text-sm">
                 {{ $menu->nama }}
             </h4>
 
-            <p class="text-green-600 font-bold text-xl my-3">
+            <p class="text-green-600 font-bold text-lg my-2">
                 RM {{ number_format($menu->harga,2) }}
             </p>
 
             <button
-                class="w-full bg-blue-600 text-white py-3 rounded-xl tambah-menu"
+                class="w-full bg-blue-600 text-white py-2 rounded-lg text-sm tambah-menu"
                 data-id="{{ $menu->id }}"
                 data-nama="{{ $menu->nama }}"
                 data-harga="{{ $menu->harga }}">
@@ -75,22 +76,22 @@
         🍰 Dessert
     </h3>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3">
 
         @foreach($menus->where('category.nama', 'Dessert') as $menu)
 
-        <div class="bg-white rounded-2xl shadow p-5 hover:shadow-lg transition">
+        <div class="bg-white rounded-xl shadow p-3 hover:shadow-lg hover:scale-105 transition cursor-pointer">
 
-            <h4 class="font-bold text-lg">
+            <h4 class="font-semibold text-sm">
                 {{ $menu->nama }}
             </h4>
 
-            <p class="text-green-600 font-bold text-xl my-3">
+            <p class="text-green-600 font-bold text-lg my-2">
                 RM {{ number_format($menu->harga,2) }}
             </p>
 
             <button
-                class="w-full bg-blue-600 text-white py-3 rounded-xl tambah-menu"
+                class="w-full bg-blue-600 text-white py-2 rounded-lg text-sm tambah-menu"
                 data-id="{{ $menu->id }}"
                 data-nama="{{ $menu->nama }}"
                 data-harga="{{ $menu->harga }}">
@@ -105,7 +106,9 @@
 
 </div>
 
-<div class="bg-white rounded-3xl shadow-lg p-6 sticky top-5">
+<div class="col-span-12 lg:col-span-4">
+
+    <div class="bg-white rounded-3xl shadow-lg p-6 sticky top-5">
 
     <div class="flex justify-between items-center mb-4">
 
@@ -161,6 +164,10 @@
         </button>
 
     </form>
+
+    </div>
+
+    </div>
 
 </div>
 
