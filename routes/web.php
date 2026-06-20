@@ -14,6 +14,8 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\PosController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -57,7 +59,6 @@ Route::get('/sales/create', [SaleController::class, 'create']);
 
 Route::get('/pos', [App\Http\Controllers\PosController::class, 'index'])->name('pos.index');
 Route::post('/pos', [App\Http\Controllers\PosController::class, 'store'])->name('pos.store');
-Route::post('/pos/add-to-cart', [PosController::class, 'addToCart']);
 
 Route::get('/receipt/{id}',
     [PosController::class, 'receipt']

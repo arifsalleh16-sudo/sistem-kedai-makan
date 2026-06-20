@@ -147,7 +147,7 @@
         RM <span id="grandTotal">0.00</span>
     </h3>
 
-    <form action="/pos/store" method="POST">
+    <form action="{{ route('pos.store') }}" method="POST">
 
         @csrf
 
