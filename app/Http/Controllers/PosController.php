@@ -45,13 +45,24 @@ class PosController extends Controller
 
     foreach($cart as $item)
     {
+        foreach($cart as $item)
+    {
         OrderItem::create([
-            'order_id' => $order->id,
-            'menu_id' => $item['id'],
-            'kuantiti' => $item['qty'],
-            'harga' => $item['harga'],
-            'subtotal' => $item['harga'] * $item['qty']
-        ]);
+        'order_id' => $order->id,
+        'menu_id' => $item['id'],
+        'kuantiti' => $item['qty'],
+        'harga' => $item['harga'],
+        'subtotal' => $item['harga'] * $item['qty']
+    ]);
+
+        Sale::create([
+        'menu_id' => $item['id'],
+        'kuantiti' => $item['qty'],
+        'harga' => $item['harga']
+    ]);
+
+    }
+    
     }
 
     return redirect()
