@@ -31,6 +31,11 @@
                 Dashboard
             </a>
 
+            <a href="/pos"
+               class="block p-3 rounded-lg hover:bg-slate-800 mb-2">
+                Order POS
+            </a>
+
             <a href="/menu"
                class="block p-3 rounded-lg hover:bg-slate-800 mb-2">
                 Menu

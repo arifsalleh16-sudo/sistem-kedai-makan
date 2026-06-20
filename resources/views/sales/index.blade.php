@@ -4,7 +4,6 @@
 
 <div class="space-y-6">
 
-```
 <!-- Header -->
 
 <div class="flex justify-between items-center">
@@ -163,7 +162,6 @@
     </table>
 
 </div>
-```
 
 </div>
 
