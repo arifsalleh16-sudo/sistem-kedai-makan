@@ -67,10 +67,4 @@ class PosController extends Controller
         );
     }
 
-    return redirect('/pos')
-    ->with('success',
-        'Order berjaya disimpan. No Resit: '.$order->no_resit
-    );
-
-
 }
