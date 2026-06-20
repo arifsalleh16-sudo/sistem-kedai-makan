@@ -155,7 +155,7 @@ async function showDetail(orderId)
 
                     <p class="text-sm text-slate-500">
 
-                        Qty: ${item.kuantiti}
+                        Kuantiti: ${item.kuantiti}
 
                     </p>
 
