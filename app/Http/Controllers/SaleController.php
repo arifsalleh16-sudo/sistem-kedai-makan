@@ -57,10 +57,23 @@ class SaleController extends Controller
 
     public function store(Request $request)
     {
+
+    $request->validate([
+        'menu_id' => 'required|exists:menus,id',
+        'kuantiti' => 'required|numeric|min:1'
+    ],
+     [
+        'menu_id.required' => 'Menu wajib dipilih.',
+        'menu_id.exists' => 'Menu yang dipilih tidak sah.',
+        'kuantiti.required' => 'Kuantiti wajib diisi.',
+        'kuantiti.numeric' => 'Kuantiti mesti nombor.',
+        'kuantiti.min' => 'Kuantiti mesti sekurang-kurangnya 1.'
+    ]
+    );
     Sale::create([
-        'menu_id' => $menu->id,
-        'nama_menu' => $menu->nama,
-        'harga_semasa' => $menu->harga,
+        'menu_id' => $request->menu_id,
+        'nama_menu' => $request->nama_menu,
+        'harga_semasa' => $request->harga_semasa,
         'kuantiti' => $request->kuantiti
     ]);
 

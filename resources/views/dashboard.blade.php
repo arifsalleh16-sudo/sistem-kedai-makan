@@ -135,7 +135,7 @@
                     </td>
 
                     <td class="py-3">
-                        {{ $menu->menu?->nama ?? 'Menu telah dipadam' }}
+                        {{ $menu->menu?->nama }}
                     </td>
 
                     <td class="py-3">
