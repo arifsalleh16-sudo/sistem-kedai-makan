@@ -14,6 +14,7 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\PosController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -62,5 +63,7 @@ Route::post('/pos', [App\Http\Controllers\PosController::class, 'store'])->name(
 
 Route::get('/receipt/{id}', [PosController::class, 'receipt'])
     ->name('receipt');
+
+Route::get('/orders', [OrderController::class, 'index']);
 
 require __DIR__.'/auth.php';
