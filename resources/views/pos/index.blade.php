@@ -2,6 +2,16 @@
 
 @section('content')
 
+@if(session('error'))
+
+<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+
+    ❌ {{ session('error') }}
+
+</div>
+
+@endif
+
 @if(session('success'))
 
 <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
@@ -167,7 +177,7 @@
             name="cart"
             id="cartInput">
 
-        <button class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl">
+        <button id="btnSimpan" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl" disabled>
 
             Simpan Order
 
@@ -188,6 +198,8 @@ let cart = [];
 function refreshCart()
 {
     let tbody = document.querySelector('#cartTable tbody');
+
+    let jumlahItem = cart.reduce((sum,item) => sum + item.qty, 0);
 
     tbody.innerHTML = '';
 
@@ -248,6 +260,11 @@ function refreshCart()
         </tr>
         `;
     });
+
+    document.getElementById('cartCount').innerText = jumlahItem;
+
+    document.getElementById('btnSimpan').disabled =
+    jumlahItem === 0;
 
     document.getElementById('grandTotal').innerText =
         total.toFixed(2);
@@ -325,6 +342,18 @@ document.querySelectorAll('.tambah-menu').forEach(btn => {
 refreshCart();
 
 </script>
+
+@if(session('error'))
+
+<script>
+Swal.fire({
+    icon: 'error',
+    title: 'Cart Kosong',
+    text: '{{ session("error") }}'
+});
+</script>
+
+@endif
 
 @if(session('success'))
 

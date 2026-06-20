@@ -73,3 +73,4 @@ class PosController extends Controller
 
 }
 
+}
