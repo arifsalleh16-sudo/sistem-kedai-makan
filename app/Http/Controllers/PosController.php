@@ -62,7 +62,7 @@ class PosController extends Controller
     ]);
 
     }
-    
+
     }
 
     return redirect()
@@ -71,10 +71,18 @@ class PosController extends Controller
 
     public function receipt($id)
     {
-        $order = Order::with('items.menu')
-                ->findOrFail($id);
+        $sale = Sale::findOrFail($id);
 
-        return view('pos.receipt', compact('order'));
+        $receiptNumber =
+        'RESIT-' .
+        date('Ymd') .
+        '-' .
+        $sale->id;
+
+        return view('pos.receipt', compact(
+        'sale',
+        'receiptNumber'
+        ));
     }
 
     public function pdf($id)
