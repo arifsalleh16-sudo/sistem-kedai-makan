@@ -56,7 +56,6 @@
                 <th>ID</th>
                 <th>Nama Menu</th>
                 <th>Harga</th>
-                <th>Kategori</th>
                 <th>Kuantiti</th>
                 <th>Tarikh</th>
             </tr>
@@ -70,11 +69,9 @@
 
                 <td>{{ $sale->id }}</td>
 
-                <td>{{ $sale->menu->nama }}</td>
+                <td>{{ $sale->menu?->nama ?? 'Menu Dipadam' }}</td>
 
-                <td>RM {{ number_format($sale->menu->harga,2) }}</td>
-
-                <td>{{ $sale->menu->category->nama }}</td>
+                <td>RM {{ number_format($sale->menu?->harga ?? 0, 2) }}</td>
 
                 <td>{{ $sale->kuantiti }}</td>
 
@@ -109,7 +106,7 @@
 
             <td>{{ $sales->sum('kuantiti') }}</td>
 
-            <td>RM {{number_format($sales->sum(function($sale) {return $sale->menu->harga * $sale->kuantiti;}),2)}}</td>
+            <td>RM {{number_format($sales->sum(function($sale) {return ($sale->menu?->harga ?? 0) * $sale->kuantiti;}),2)}}</td>
     </tr>
         @endforeach
         </tbody>
