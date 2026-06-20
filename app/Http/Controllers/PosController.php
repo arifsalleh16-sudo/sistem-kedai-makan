@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Menu;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Menu;
 use App\Models\Order;
 use App\Models\OrderItem;
-use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Sale;
+
 
 
 class PosController extends Controller
@@ -24,16 +25,16 @@ class PosController extends Controller
     {
     $cart = session('cart', []);
 
-    $total = 0;
+    $jumlah_harga = 0;
 
     foreach ($cart as $item)
     {
-        $total += $item['harga'] * $item['qty'];
+        $jumlah_harga += $item['harga'] * $item['qty'];
     }
 
     $order = Order::create([
         'no_resit' => 'RESIT-' . time(),
-        'total' => $total
+        'jumlah_harga' => $jumlah_harga
     ]);
 
     foreach ($cart as $item)
