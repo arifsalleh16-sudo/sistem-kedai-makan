@@ -16,7 +16,7 @@
 
     <div class="mb-8">
         <h1 class="text-4xl font-bold text-slate-800">
-            Dashboard Kedai Makan
+            Laman Utama Kedai Makan
         </h1>
 
         <p class="text-slate-500">
@@ -30,7 +30,7 @@
 
         <div class="bg-white p-6 rounded-2xl shadow">
             <p class="text-slate-500">
-                Pendapatan
+                Jumlah Pendapatan
             </p>
 
             <h2 class="text-3xl font-bold mt-2">

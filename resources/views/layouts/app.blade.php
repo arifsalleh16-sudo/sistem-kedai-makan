@@ -30,7 +30,7 @@
 
             <a href="/dashboard"
                class="block p-3 rounded-lg hover:bg-slate-800 mb-2">
-                Dashboard
+                Laman Utama
             </a>
 
             <a href="/pos"
@@ -40,7 +40,7 @@
 
             <a href="/orders"
                class="block p-3 rounded-lg hover:bg-slate-800 mb-2">
-                Orders
+                Pesanan
             </a>
 
             <a href="/menu"
@@ -50,7 +50,7 @@
 
             <a href="/sales"
                class="block p-3 rounded-lg hover:bg-slate-800 mb-2">
-                Sales
+                Jualan
             </a>
 
         </nav>
@@ -110,21 +110,6 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
-
-@if(session('success'))
-
-<script>
-
-Swal.fire({
-    icon: 'success',
-    title: 'Order Berjaya',
-    text: '{{ session("success") }}',
-    confirmButtonText: 'OK'
-});
-
-</script>
-
-@endif
 
 </body>
 </html>

@@ -9,7 +9,7 @@
         <div>
 
             <h1 class="text-3xl font-bold text-slate-800">
-                Order Management
+                Pengurusan Pesanan
             </h1>
 
             <p class="text-slate-500">
@@ -26,7 +26,7 @@
 
             <tr class="bg-slate-100">
 
-                <th class="p-4 text-left">No Resit</th>
+                <th class="p-4 text-left">No. Resit</th>
                 <th class="p-4 text-left">Jumlah</th>
                 <th class="p-4 text-left">Tarikh</th>
                 <th class="p-4 text-left">Status</th>
@@ -64,7 +64,7 @@
 
         <button onclick="showDetail({{ $order->id }})" class="bg-blue-600 text-white px-4 py-2 rounded-lg">
 
-        Detail
+        Butiran
 
         </button>
 
@@ -91,7 +91,7 @@ class="fixed inset-0 bg-black/50 hidden justify-center items-center z-50">
         <div class="flex justify-between mb-4">
 
             <h2 class="font-bold text-xl">
-                Detail Order
+                Butiran Pesanan
             </h2>
 
             <button

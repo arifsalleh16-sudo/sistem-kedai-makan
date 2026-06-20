@@ -14,7 +14,7 @@
 
         <div>
             <h1 class="text-3xl font-bold text-slate-800">
-                Menu Management
+                Pengurusan Menu
             </h1>
 
             <p class="text-slate-500">
