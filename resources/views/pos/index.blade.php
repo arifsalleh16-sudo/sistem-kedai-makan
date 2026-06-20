@@ -2,97 +2,165 @@
 
 @section('content')
 
-<div class="container-fluid">
+<div class="col-lg-8">
 
-    <h2 class="mb-4">🛒 Order POS</h2>
+    <!-- MAKANAN -->
+    <h3 class="text-2xl font-bold mb-4">
+        🍛 Makanan
+    </h3>
 
-    <div class="row">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
 
-        <!-- MENU -->
-        <div class="col-md-8">
+        @foreach($menus->where('category.nama', 'Makanan') as $menu)
 
-            <div class="row">
+        <div class="bg-white rounded-2xl shadow p-5 hover:shadow-lg transition">
 
-                @foreach($menus as $menu)
+            <h4 class="font-bold text-lg">
+                {{ $menu->nama }}
+            </h4>
 
-                <div class="col-md-4 mb-3">
+            <p class="text-green-600 font-bold text-xl my-3">
+                RM {{ number_format($menu->harga,2) }}
+            </p>
 
-                    <div class="card shadow-sm">
-
-                        <div class="card-body">
-
-                            <h5>{{ $menu->nama }}</h5>
-
-                            <p class="text-success">
-                                RM {{ number_format($menu->harga,2) }}
-                            </p>
-
-                            <button
-                                class="btn btn-primary tambah-menu"
-                                data-id="{{ $menu->id }}"
-                                data-nama="{{ $menu->nama }}"
-                                data-harga="{{ $menu->harga }}"
-                            >
-                                Tambah
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                @endforeach
-
-            </div>
+            <button
+                class="w-full bg-blue-600 text-white py-3 rounded-xl tambah-menu"
+                data-id="{{ $menu->id }}"
+                data-nama="{{ $menu->nama }}"
+                data-harga="{{ $menu->harga }}">
+                Tambah
+            </button>
 
         </div>
 
-        <!-- TROLI -->
-        <div class="col-md-4">
-
-            <div class="card shadow">
-
-                <div class="card-header">
-                    Troli Pesanan
-                </div>
-
-                <div class="card-body">
-
-                    <table class="table" id="cartTable">
-
-                        <thead>
-                            <tr>
-                                <th>Menu</th>
-                                <th>Qty</th>
-                                <th>Jumlah</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-
-                        </tbody>
-
-                    </table>
-
-                    <hr>
-
-                    <h4>
-                        Jumlah:
-                        RM <span id="grandTotal">0.00</span>
-                    </h4>
-
-                    <button class="btn btn-success w-100 mt-3">
-                        Simpan Order
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
+        @endforeach
 
     </div>
+
+    <!-- MINUMAN -->
+    <h3 class="text-2xl font-bold mb-4">
+        🥤 Minuman
+    </h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+
+        @foreach($menus->where('category.nama', 'Minuman') as $menu)
+
+        <div class="bg-white rounded-2xl shadow p-5 hover:shadow-lg transition">
+
+            <h4 class="font-bold text-lg">
+                {{ $menu->nama }}
+            </h4>
+
+            <p class="text-green-600 font-bold text-xl my-3">
+                RM {{ number_format($menu->harga,2) }}
+            </p>
+
+            <button
+                class="w-full bg-blue-600 text-white py-3 rounded-xl tambah-menu"
+                data-id="{{ $menu->id }}"
+                data-nama="{{ $menu->nama }}"
+                data-harga="{{ $menu->harga }}">
+                Tambah
+            </button>
+
+        </div>
+
+        @endforeach
+
+    </div>
+
+    <!-- DESSERT -->
+    <h3 class="text-2xl font-bold mb-4">
+        🍰 Dessert
+    </h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+        @foreach($menus->where('category.nama', 'Dessert') as $menu)
+
+        <div class="bg-white rounded-2xl shadow p-5 hover:shadow-lg transition">
+
+            <h4 class="font-bold text-lg">
+                {{ $menu->nama }}
+            </h4>
+
+            <p class="text-green-600 font-bold text-xl my-3">
+                RM {{ number_format($menu->harga,2) }}
+            </p>
+
+            <button
+                class="w-full bg-blue-600 text-white py-3 rounded-xl tambah-menu"
+                data-id="{{ $menu->id }}"
+                data-nama="{{ $menu->nama }}"
+                data-harga="{{ $menu->harga }}">
+                Tambah
+            </button>
+
+        </div>
+
+        @endforeach
+
+    </div>
+
+</div>
+
+<div class="bg-white rounded-3xl shadow-lg p-6 sticky top-5">
+
+    <div class="flex justify-between items-center mb-4">
+
+        <h3 class="text-2xl font-bold">
+            🛒 Cart
+        </h3>
+
+        <span
+            id="cartCount"
+            class="bg-red-500 text-white px-3 py-1 rounded-full">
+            0
+        </span>
+
+    </div>
+
+    <table id="cartTable" class="w-full mb-4">
+
+        <thead>
+            <tr class="border-b">
+                <th class="text-left">Menu</th>
+                <th>Qty</th>
+                <th>Jumlah</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        </tbody>
+
+    </table>
+
+    <hr class="my-4">
+
+    <h3 class="text-2xl font-bold text-green-600 mb-4">
+        RM <span id="grandTotal">0.00</span>
+    </h3>
+
+    <form action="/pos/store" method="POST">
+
+        @csrf
+
+        <input
+            type="hidden"
+            name="cart"
+            id="cartInput">
+
+        <button
+            class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl">
+
+            Simpan Order
+
+        </button>
+
+    </form>
 
 </div>
 
@@ -115,16 +183,94 @@ function refreshCart()
         total += subtotal;
 
         tbody.innerHTML += `
-        <tr>
-            <td>${item.nama}</td>
-            <td>${item.qty}</td>
-            <td>RM ${subtotal.toFixed(2)}</td>
+        <tr class="border-b">
+
+            <td class="py-2">
+                ${item.nama}
+            </td>
+
+            <td>
+
+                <button
+                    onclick="kurangQty(${item.id})"
+                    type="button"
+                    class="bg-red-500 text-white px-2 rounded">
+                    -
+                </button>
+
+                <span class="mx-2">
+                    ${item.qty}
+                </span>
+
+                <button
+                    onclick="tambahQty(${item.id})"
+                    type="button"
+                    class="bg-green-500 text-white px-2 rounded">
+                    +
+                </button>
+
+            </td>
+
+            <td>
+                RM ${subtotal.toFixed(2)}
+            </td>
+
+            <td>
+
+                <button
+                    onclick="hapusItem(${item.id})"
+                    type="button"
+                    class="text-red-600">
+
+                    🗑️
+
+                </button>
+
+            </td>
+
         </tr>
         `;
     });
 
     document.getElementById('grandTotal').innerText =
         total.toFixed(2);
+
+    document.getElementById('cartCount').innerText =
+        cart.reduce((sum,item) => sum + item.qty, 0);
+
+    document.getElementById('cartInput').value =
+        JSON.stringify(cart);
+}
+
+function tambahQty(id)
+{
+    let item = cart.find(x => x.id == id);
+
+    if(item)
+    {
+        item.qty++;
+    }
+
+    refreshCart();
+}
+
+function kurangQty(id)
+{
+    let item = cart.find(x => x.id == id);
+
+    if(item && item.qty > 1)
+    {
+        item.qty--;
+    }
+
+    refreshCart();
+}
+
+function hapusItem(id)
+{
+    cart = cart.filter(x => x.id != id);
+
+    refreshCart();
 }
 
 document.querySelectorAll('.tambah-menu').forEach(btn => {
@@ -144,10 +290,10 @@ document.querySelectorAll('.tambah-menu').forEach(btn => {
         else
         {
             cart.push({
-                id:id,
-                nama:nama,
-                harga:harga,
-                qty:1
+                id: id,
+                nama: nama,
+                harga: harga,
+                qty: 1
             });
         }
 
@@ -156,6 +302,8 @@ document.querySelectorAll('.tambah-menu').forEach(btn => {
     });
 
 });
+
+refreshCart();
 
 </script>
 

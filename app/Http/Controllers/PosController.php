@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Sale;
 
 
 class PosController extends Controller
@@ -21,21 +22,30 @@ class PosController extends Controller
 
     public function store(Request $request)
     {
-    $cart = $request->cart;
+    $cart = json_decode($request->cart, true);
 
-    $jumlah = collect($cart)->sum(function ($item) {
-        return $item['harga'] * $item['qty'];
-    });
+    if(empty($cart))
+    {
+        return back()
+            ->with('error', 'Troli kosong');
+    }
 
-    $order = Order::create([
-        'no_resit' => 'RESIT' . str_pad(
-            Order::count() + 1,
-            4,
-            '0',
-            STR_PAD_LEFT
-        ),
-        'jumlah_harga' => $jumlah
-    ]);
+    foreach($cart as $item)
+    {
+        Sale::create([
+
+            'menu_id' => $item['id'],
+
+            'kuantiti' => $item['qty']
+
+        ]);
+    }
+
+    return redirect('/sales')
+        ->with('success', 'Order berjaya disimpan');
+    }
+
+    
 
     foreach ($cart as $item)
     {
