@@ -80,6 +80,7 @@ class PosController extends Controller
         $sale->id;
 
         return view('pos.receipt', compact(
+        'order',    
         'sale',
         'receiptNumber'
         ));

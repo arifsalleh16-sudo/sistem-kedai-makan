@@ -63,7 +63,7 @@ Route::post('/pos', [App\Http\Controllers\PosController::class, 'store'])->name(
 
 Route::get('/receipt/{id}', [PosController::class, 'receipt'])
     ->name('receipt');
-
+    
 Route::get('/receipt/{id}/pdf', [PosController::class, 'pdf'])
     ->name('receipt.pdf');
 
