@@ -43,24 +43,28 @@ class PosController extends Controller
         'jumlah_harga' => $total
     ]);
 
-        foreach($cart as $item)
+    foreach($cart as $item)
     {
         OrderItem::create([
-        'order_id' => $order->id,
-        'menu_id' => $item['id'],
-        'kuantiti' => $item['qty'],
-        'harga' => $item['harga'],
-        'subtotal' => $item['harga'] * $item['qty']
-    ]);
+            'order_id' => $order->id,
+            'menu_id' => $item['id'],
+            'kuantiti' => $item['qty'],
+            'harga' => $item['harga'],
+            'subtotal' => $item['harga'] * $item['qty']
+        ]);
 
         Sale::create([
-        'menu_id' => $item['id'],
-        'kuantiti' => $item['qty'],
-        'harga' => $item['harga']
-    ]);
-
+            'menu_id' => $item['id'],
+            'kuantiti' => $item['qty'],
+            'harga' => $item['harga']
+        ]);
     }
 
+    return redirect('/pos')
+        ->with(
+            'success',
+            'Order berjaya disimpan. No Resit: '.$order->no_resit
+        );
     }
 
     return redirect('/pos')
