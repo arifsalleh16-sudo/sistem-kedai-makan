@@ -57,6 +57,7 @@ Route::get('/sales/create', [SaleController::class, 'create']);
 
 Route::get('/pos', [App\Http\Controllers\PosController::class, 'index'])->name('pos.index');
 Route::post('/pos', [App\Http\Controllers\PosController::class, 'store'])->name('pos.store');
+Route::post('/pos/add-to-cart', [PosController::class, 'addToCart']);
 
 Route::get('/receipt/{id}',
     [PosController::class, 'receipt']

@@ -147,7 +147,7 @@
         RM <span id="grandTotal">0.00</span>
     </h3>
 
-    <form action="/pos/receipt" method="POST">
+    <form action="/pos/store" method="POST">
 
         @csrf
 
@@ -156,8 +156,7 @@
             name="cart"
             id="cartInput">
 
-        <button
-            class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl">
+        <button class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl">
 
             Simpan Order
 
