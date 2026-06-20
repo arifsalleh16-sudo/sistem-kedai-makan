@@ -60,14 +60,16 @@ Route::get('/sales/create', [SaleController::class, 'create']);
 Route::get('/pos', [App\Http\Controllers\PosController::class, 'index'])->name('pos.index');
 Route::post('/pos', [App\Http\Controllers\PosController::class, 'store'])->name('pos.store');
 
-Route::get('/test-receipt', function () {
-    return 'Receipt Route Berjaya';
-});
 
-Route::get('/receipt/{id}', [PosController::class, 'receipt'])
-    ->name('receipt');
+public function receipt($id)
+{
+    return "Receipt ID = ".$id;
+}
 
-Route::get('/receipt/{id}/pdf', [PosController::class, 'pdf'])
-    ->name('receipt.pdf');
+//Route::get('/receipt/{id}', [PosController::class, 'receipt'])
+//    ->name('receipt');
+
+//Route::get('/receipt/{id}/pdf', [PosController::class, 'pdf'])
+//    ->name('receipt.pdf');
 
 require __DIR__.'/auth.php';
