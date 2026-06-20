@@ -26,11 +26,10 @@
 
             <tr class="bg-slate-100">
 
-                <th class="p-4 text-left">ID</th>
-                <th class="p-4 text-left">Menu</th>
-                <th class="p-4 text-left">Kuantiti</th>
-                <th class="p-4 text-left">Harga</th>
+                <th class="p-4 text-left">No Resit</th>
+                <th class="p-4 text-left">Jumlah</th>
                 <th class="p-4 text-left">Tarikh</th>
+                <th class="p-4 text-left">Status</th>
                 <th class="p-4 text-center">Tindakan</th>
 
             </tr>
@@ -41,54 +40,39 @@
 
             @foreach($orders as $order)
 
-            <tr class="border-b">
+        <tr class="border-b">
 
-                <td class="p-4">
-                    #{{ $order->id }}
-                </td>
+            <td class="p-4 font-semibold">
+                {{ $order->no_resit }}
+            </td>
 
-                <td class="p-4">
-                    {{ $order->menu->nama }}
-                </td>
+            <td class="p-4 text-green-600 font-bold">
+                RM {{ number_format($order->jumlah_harga,2) }}
+            </td>
 
-                <td class="p-4">
-                    {{ $order->kuantiti }}
-                </td>
+            <td class="p-4">
+                {{ $order->created_at->format('d M Y H:i') }}
+            </td>
 
-                <td class="p-4">
+            <td class="p-4">
+                <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full">
+                Selesai
+                </span>
+            </td>
 
-                    RM {{ number_format($order->menu->harga * $order->kuantiti,2) }}
+            <td class="p-4">
 
-                </td>
+        <button onclick="showDetail({{ $order->id }})" class="bg-blue-600 text-white px-4 py-2 rounded-lg">
 
-                <td class="p-4">
+        Detail
 
-                    {{ $order->created_at->format('d M Y H:i') }}
+        </button>
 
-                </td>
+    </td>
 
-                <td class="p-4 text-center">
+</tr>
 
-                    <button
-
-                        onclick="showDetail(
-                            '{{ $order->menu->nama }}',
-                            '{{ $order->kuantiti }}',
-                            '{{ number_format($order->menu->harga * $order->kuantiti,2) }}',
-                            '{{ $order->created_at->format('d M Y H:i') }}'
-                        )"
-
-                        class="bg-blue-600 text-white px-4 py-2 rounded-lg">
-
-                        Detail
-
-                    </button>
-
-                </td>
-
-            </tr>
-
-            @endforeach
+@endforeach
 
         </tbody>
 
@@ -129,23 +113,88 @@ class="fixed inset-0 bg-black/50 hidden justify-center items-center z-50">
 
 <script>
 
-function showDetail(menu, qty, jumlah, tarikh)
+async function showDetail(orderId)
 {
-    document.getElementById('modalContent').innerHTML = `
+    const response =
+        await fetch('/orders/' + orderId + '/detail');
+
+    const order =
+        await response.json();
+
+    let html = `
 
         <div class="space-y-3">
 
-            <p><strong>Menu:</strong> ${menu}</p>
+            <div class="border-b pb-3">
 
-            <p><strong>Kuantiti:</strong> ${qty}</p>
+                <h3 class="font-bold text-lg">
+                    ${order.no_resit}
+                </h3>
 
-            <p><strong>Jumlah:</strong> RM ${jumlah}</p>
+                <p class="text-slate-500">
+                    ${order.created_at}
+                </p>
 
-            <p><strong>Tarikh:</strong> ${tarikh}</p>
+            </div>
+
+    `;
+
+    order.items.forEach(item => {
+
+        html += `
+
+            <div class="flex justify-between border-b py-2">
+
+                <div>
+
+                    <p class="font-semibold">
+
+                        ${item.menu.nama}
+
+                    </p>
+
+                    <p class="text-sm text-slate-500">
+
+                        Qty: ${item.kuantiti}
+
+                    </p>
+
+                </div>
+
+                <div class="font-bold text-green-600">
+
+                    RM ${parseFloat(item.subtotal).toFixed(2)}
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+    html += `
+
+        <div class="flex justify-between mt-4 pt-4 border-t">
+
+            <span class="font-bold">
+                Jumlah
+            </span>
+
+            <span class="font-bold text-xl text-green-600">
+
+                RM ${parseFloat(order.jumlah_harga).toFixed(2)}
+
+            </span>
+
+        </div>
 
         </div>
 
     `;
+
+    document.getElementById('modalContent')
+        .innerHTML = html;
 
     document.getElementById('detailModal')
         .classList.remove('hidden');
@@ -162,8 +211,6 @@ function closeModal()
     document.getElementById('detailModal')
         .classList.remove('flex');
 }
-
-new DataTable('#ordersTable');
 
 </script>
 

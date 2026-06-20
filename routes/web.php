@@ -66,4 +66,9 @@ Route::get('/receipt/{id}', [PosController::class, 'receipt'])
 
 Route::get('/orders', [OrderController::class, 'index']);
 
+Route::get(
+    '/orders/{id}/detail',
+    [OrderController::class, 'detail']
+);
+
 require __DIR__.'/auth.php';

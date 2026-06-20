@@ -43,8 +43,6 @@ class PosController extends Controller
         'jumlah_harga' => $total
     ]);
 
-    foreach($cart as $item)
-    {
         foreach($cart as $item)
     {
         OrderItem::create([
@@ -70,7 +68,5 @@ class PosController extends Controller
         'Order berjaya disimpan. No Resit: '.$order->no_resit
     );
 
-
-}
 
 }
