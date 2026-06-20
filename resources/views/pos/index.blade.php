@@ -129,7 +129,7 @@
         <thead>
             <tr class="border-b">
                 <th class="text-left">Menu</th>
-                <th>Qty</th>
+                <th>Kuantiti</th>
                 <th>Jumlah</th>
                 <th></th>
             </tr>
@@ -147,7 +147,7 @@
         RM <span id="grandTotal">0.00</span>
     </h3>
 
-    <form action="/pos/store" method="POST">
+    <form action="/pos/receipt" method="POST">
 
         @csrf
 
