@@ -65,41 +65,11 @@ class PosController extends Controller
 
     }
 
-    return redirect()
-        ->route('receipt', $order->id);
-    }
-
-    public function receipt($id)
-    {
-        $sale = Sale::findOrFail($id);
-
-        $receiptNumber =
-        'RESIT-' .
-        date('Ymd') .
-        '-' .
-        $sale->id;
-
-        return view('pos.receipt', compact(
-        'order',    
-        'sale',
-        'receiptNumber'
-        ));
-    }
-
-    public function pdf($id)
-    {
-        $order = Order::with('items.menu')
-        ->findOrFail($id);
-
-        $pdf = Pdf::loadView(
-        'pos.receipt-pdf',
-        compact('order')
+    return redirect('/pos')
+    ->with('success',
+        'Order berjaya disimpan. No Resit: '.$order->no_resit
     );
 
-        return $pdf->download(
-        $order->no_resit . '.pdf'
-    );
-    }
 
 }
 

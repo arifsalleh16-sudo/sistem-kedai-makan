@@ -1,6 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
+
+@if(session('success'))
+
+<div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+
+    ✅ {{ session('success') }}
+
+</div>
+
+@endif
+
 <div class="grid grid-cols-12 gap-6">
 
     <div class="col-span-12 lg:col-span-8">
@@ -287,6 +298,8 @@ document.querySelectorAll('.tambah-menu').forEach(btn => {
         let nama = this.dataset.nama;
         let harga = parseFloat(this.dataset.harga);
 
+         console.log(id,nama,harga);
+
         let existing = cart.find(x => x.id == id);
 
         if(existing)
@@ -312,5 +325,20 @@ document.querySelectorAll('.tambah-menu').forEach(btn => {
 refreshCart();
 
 </script>
+
+@if(session('success'))
+
+<script>
+
+Swal.fire({
+    icon: 'success',
+    title: 'Order Berjaya',
+    text: '{{ session("success") }}',
+    confirmButtonText: 'OK'
+});
+
+</script>
+
+@endif
 
 @endsection

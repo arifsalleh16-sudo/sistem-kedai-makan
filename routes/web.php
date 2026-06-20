@@ -12,10 +12,9 @@ use App\Http\Controllers\TagController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\LoginController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\PosController;
-
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
@@ -53,6 +52,7 @@ Route::get('/test', function () {
 
 });
 
+
 Route::get('/sales', [SaleController::class, 'index']);
 Route::post('/sales', [SaleController::class, 'store']);
 Route::get('/sales/create', [SaleController::class, 'create']);
@@ -60,16 +60,7 @@ Route::get('/sales/create', [SaleController::class, 'create']);
 Route::get('/pos', [App\Http\Controllers\PosController::class, 'index'])->name('pos.index');
 Route::post('/pos', [App\Http\Controllers\PosController::class, 'store'])->name('pos.store');
 
-
-public function receipt($id)
-{
-    return "Receipt ID = ".$id;
-}
-
-//Route::get('/receipt/{id}', [PosController::class, 'receipt'])
-//    ->name('receipt');
-
-//Route::get('/receipt/{id}/pdf', [PosController::class, 'pdf'])
-//    ->name('receipt.pdf');
+Route::get('/receipt/{id}', [PosController::class, 'receipt'])
+    ->name('receipt');
 
 require __DIR__.'/auth.php';

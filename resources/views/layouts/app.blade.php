@@ -6,6 +6,8 @@
     @vite(['resources/css/app.css','resources/js/app.js'])
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body class="bg-slate-100">
@@ -108,6 +110,21 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+
+@if(session('success'))
+
+<script>
+
+Swal.fire({
+    icon: 'success',
+    title: 'Order Berjaya',
+    text: '{{ session("success") }}',
+    confirmButtonText: 'OK'
+});
+
+</script>
+
+@endif
 
 </body>
 </html>
