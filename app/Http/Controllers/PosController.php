@@ -22,30 +22,18 @@ class PosController extends Controller
 
     public function store(Request $request)
     {
-    $cart = json_decode($request->cart, true);
+    $cart = session('cart', []);
 
-    if(empty($cart))
+    $total = 0;
+
+    foreach ($cart as $item)
     {
-        return back()
-            ->with('error', 'Troli kosong');
+        $total += $item['harga'] * $item['qty'];
     }
 
-    foreach($cart as $item)
-    {
-        Sale::create([
-
-            'menu_id' => $item['id'],
-
-            'kuantiti' => $item['qty']
-
-        ]);
-    }
-
-    return redirect('/sales')
-        ->with('success', 'Order berjaya disimpan');
-    }
-
-    
+    $order = Order::create([
+        'total' => $total
+    ]);
 
     foreach ($cart as $item)
     {
@@ -58,8 +46,10 @@ class PosController extends Controller
         ]);
     }
 
-    return redirect()
-        ->route('receipt', $order->id);
+    session()->forget('cart');
+
+    return redirect('/pos')
+        ->with('success', 'Order berjaya disimpan');
     }
 
     public function receipt($id)
