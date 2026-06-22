@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Menu extends Model
 {
     protected $fillable = [
+        'user_id',
         'nama',
         'harga',
         'is_active',

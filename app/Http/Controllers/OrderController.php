@@ -11,8 +11,7 @@ class OrderController extends Controller
     {
         $orders = Order::where(
     'user_id',
-    auth()->id()
-)
+    auth()->id())
 ->latest()
 ->get();
     }
@@ -21,8 +20,7 @@ class OrderController extends Controller
     {
         $order = Order::with('items.menu')
     ->where('user_id', auth()->id())
-    ->where('id', $id)
-    ->firstOrFail();
+    ->findOrFail($id);
 
     return response()->json($order);
     }

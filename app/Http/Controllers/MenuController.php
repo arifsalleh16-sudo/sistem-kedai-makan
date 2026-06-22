@@ -61,7 +61,8 @@ public function store(Request $request)
     'user_id' => auth()->id(),
     'nama' => $request->nama,
     'harga' => $request->harga,
-    'category_id' => $request->category_id
+    'category_id' => $request->category_id,
+    'is_active' => true
     ]);
 
     return redirect('/menu');
