@@ -14,26 +14,27 @@ use Illuminate\Notifications\Notifiable;
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable implements MustVerifyEmail
 {
-    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-}
 
-public function menus()
-{
-    return $this->hasMany(Menu::class);
-}
+    public function menus()
+    {
+        return $this->hasMany(Menu::class);
+    }
 
-public function orders()
-{
-    return $this->hasMany(Order::class);
-}
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 
-public function sales()
-{
+    public function sales()
+    {
     return $this->hasMany(Sale::class);
+    }
 }
+
+
