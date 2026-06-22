@@ -20,7 +20,12 @@ public function index(Request $request)
     //    })
     //    ->get();
 
-    $menus = Menu::all();
+    //$menus = Menu::all();
+    $menus = Menu::where(
+    'user_id',
+    auth()->id()
+    )->get();
+
     return view('menu', [
         'menus' => $menus
     ]);
@@ -53,9 +58,10 @@ public function store(Request $request)
 );
 
     Menu::create([
-        'nama' => $request->nama,
-        'harga' => $request->harga,
-        'category_id' => $request->category_id
+    'user_id' => auth()->id(),
+    'nama' => $request->nama,
+    'harga' => $request->harga,
+    'category_id' => $request->category_id
     ]);
 
     return redirect('/menu');

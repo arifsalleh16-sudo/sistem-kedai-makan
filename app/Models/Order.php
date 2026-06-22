@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class Order extends Model
 {
     protected $fillable = [
+    'user_id',    
     'no_resit',
     'jumlah_harga'
     ];

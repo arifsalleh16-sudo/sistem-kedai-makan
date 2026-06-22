@@ -38,9 +38,12 @@ class PosController extends Controller
         $total += $item['harga'] * $item['qty'];
     }
 
+    $resit = 'RESIT-' . time();
+
     $order = Order::create([
-        'no_resit' => 'RESIT-' . time(),
-        'jumlah_harga' => $total
+    'user_id' => auth()->id(),
+    'no_resit' => $resit,
+    'jumlah_harga' => $total
     ]);
 
     foreach($cart as $item)

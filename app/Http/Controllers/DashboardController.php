@@ -12,7 +12,10 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $jumlahMenu = Menu::count();
+        $jumlahMenu = Menu::where(
+        'user_id',
+        auth()->id()
+        )->count();
 
         $jumlahUser = User::count();
 
