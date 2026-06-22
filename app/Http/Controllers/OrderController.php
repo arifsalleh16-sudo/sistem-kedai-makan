@@ -14,6 +14,11 @@ class OrderController extends Controller
     auth()->id())
 ->latest()
 ->get();
+
+    return view(
+    'orders.index',
+    compact('orders')
+);
     }
 
     public function detail($id)
