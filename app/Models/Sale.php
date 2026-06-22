@@ -9,16 +9,16 @@ use Illuminate\Http\Request;
 class Sale extends Model
 {
     protected $fillable = [
+        'user_id',
         'menu_id',
-        'kuantiti'
+        'kuantiti',
     ];
 
     public function menu()
     {
-
         return $this->belongsTo(Menu::class);
-
     }
-
-
 }
+
+
+

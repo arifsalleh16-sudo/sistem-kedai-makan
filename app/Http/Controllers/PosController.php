@@ -15,7 +15,11 @@ class PosController extends Controller
 {
     public function index()
     {
-        $menus = Menu::all();
+        $menus = Menu::where(
+        'user_id',
+        auth()->id()
+        )->get();
+
 
         return view('pos.index', compact('menus'));
     
@@ -57,9 +61,9 @@ class PosController extends Controller
         ]);
 
         Sale::create([
+            'user_id' => auth()->id(),
             'menu_id' => $item['id'],
             'kuantiti' => $item['qty'],
-            'harga' => $item['harga']
         ]);
     }
 

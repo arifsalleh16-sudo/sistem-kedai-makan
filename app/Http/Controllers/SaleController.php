@@ -12,7 +12,7 @@ class SaleController extends Controller
 
     public function create()
     {
-        $menus = Menu::all();
+        $menus = Menu::where('user_id', auth()->id())->get();
 
         return view('sales.create', [
             'menus' => $menus
@@ -22,7 +22,10 @@ class SaleController extends Controller
      public function index()
     {
 
-    $sales = Sale::all();
+    $sales = Sale::where(
+    'user_id',
+    auth()->id()
+    )->get();
 
     $jumlahSales = 0;
 
@@ -72,11 +75,12 @@ class SaleController extends Controller
     ]
     );
     Sale::create([
-        'menu_id' => $request->menu_id,
-        'nama_menu' => $request->nama_menu,
-        'harga_semasa' => $request->harga_semasa,
-        'kuantiti' => $request->kuantiti
+    'user_id' => auth()->id(),
+    'menu_id' => $item['id'],
+    'kuantiti' => $item['qty'],
+    'harga' => $item['harga']
     ]);
+    
 
     return redirect('/sales');
     }

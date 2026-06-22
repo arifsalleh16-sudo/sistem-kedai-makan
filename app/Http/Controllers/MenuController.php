@@ -69,7 +69,10 @@ public function store(Request $request)
 
 public function edit($id)
 {
-    $menu = Menu::find($id);
+    $menu = Menu::where(
+    'user_id',
+    auth()->id()
+)->findOrFail($id);
 
     $categories = Category::all();
 
@@ -81,7 +84,10 @@ public function edit($id)
 
 public function update(Request $request, $id)
 {
-    $menu = Menu::find($id);
+    $menu = Menu::where(
+    'user_id',
+    auth()->id()
+)->findOrFail($id);
 
     $request->validate([
         'nama' => 'required',
@@ -100,10 +106,14 @@ public function update(Request $request, $id)
 }
 
 
-public function toggleStatus(Menu $menu)
+public function toggleStatus($id)
 {
-    $menu->is_active = !$menu->is_active;
+    $menu = Menu::where(
+        'user_id',
+        auth()->id()
+    )->findOrFail($id);
 
+    $menu->is_active = !$menu->is_active;
     $menu->save();
 
     return redirect('/menu');

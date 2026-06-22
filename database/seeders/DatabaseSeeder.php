@@ -20,21 +20,16 @@ class DatabaseSeeder extends Seeder
         
         $this->call([
         CategorySeeder::class,
-        MenuSeeder::class,
-        ]);
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        //MenuSeeder::class,
         ]);
 
         User::firstOrCreate(
-            ['email' => 'admin@kedaimakan.com'],
-        [
-            'name' => 'Admin',
-            'password' => Hash::make('password123')
-        ]
-        );
+    ['email' => 'test2@example.com'],
+    [
+        'name' => 'Test User',
+        'password' => Hash::make('password123')
+    ]
+);
     }
 
     
