@@ -9,18 +9,20 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::latest()->get();
-
-        return view(
-            'orders.index',
-            compact('orders')
-        );
+        $orders = Order::where(
+    'user_id',
+    auth()->id()
+)
+->latest()
+->get();
     }
 
     public function detail($id)
     {
         $order = Order::with('items.menu')
-            ->findOrFail($id);
+    ->where('user_id', auth()->id())
+    ->where('id', $id)
+    ->firstOrFail();
 
     return response()->json($order);
     }
