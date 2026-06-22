@@ -91,11 +91,11 @@
             </h3>
 
             <h2 class="text-3xl font-bold">
-                {{ $menuPalingLaris->menu->nama }}
+                {{ $menuPalingLaris?->menu?->nama ?? 'Tiada Jualan' }}
             </h2>
 
             <p class="text-slate-500 mt-2">
-                {{ $menuPalingLaris->jumlah }} Unit Terjual
+                {{ $menuPalingLaris->jumlah ?? 0 }}
             </p>
 
         </div>

@@ -66,22 +66,25 @@ class DashboardController extends Controller
 
         }
 
-        $menuPalingLaris = Sale::where(
+        $menuPalingLaris = Sale::with('menu')
+    ->where('user_id', auth()->id())
+    ->select(
+        'menu_id',
+        DB::raw('SUM(kuantiti) as jumlah')
+    )
+    ->groupBy('menu_id')
+    ->orderByDesc('jumlah')
+    ->first();
+
+        $jualanHariIni = Sale::where(
     'user_id',
     auth()->id()
-    )
-->select(
-    'menu_id',
-    DB::raw('SUM(kuantiti) as jumlah')
 )
-->groupBy('menu_id')
-->orderByDesc('jumlah')
-->first();
-
-        $jualanHariIni = Sale::whereDate(
+->whereDate(
     'created_at',
     Carbon::today()
-)->count();
+)
+->count();
         
         $itemTerjualHariIni = Sale::where(
     'user_id',
@@ -93,21 +96,21 @@ class DashboardController extends Controller
 )
 ->sum('kuantiti');
 
-        $topMenus = Sale::where(
-    'user_id',
-    auth()->id()
-)
-->selectRaw('menu_id, SUM(kuantiti) as jumlah')
-->groupBy('menu_id')
-->orderByDesc('jumlah')
-->take(5)
-->get();
+        $topMenus = Sale::with('menu')
+    ->where('user_id', auth()->id())
+    ->selectRaw('menu_id, SUM(kuantiti) as jumlah')
+    ->groupBy('menu_id')
+    ->orderByDesc('jumlah')
+    ->take(5)
+    ->get();
 
-        $salesByDate = Sale::where(
-    'sales.user_id',
-    auth()->id()
+        $salesByDate = Sale::join(
+    'menus',
+    'sales.menu_id',
+    '=',
+    'menus.id'
 )
-->join('menus', 'sales.menu_id', '=', 'menus.id')
+->where('sales.user_id', auth()->id())
 ->selectRaw('
     DATE(sales.created_at) as tarikh,
     SUM(menus.harga * sales.kuantiti) as jumlah
