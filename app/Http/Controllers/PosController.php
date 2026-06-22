@@ -15,13 +15,11 @@ class PosController extends Controller
 {
     public function index()
     {
-        $menus = Menu::where(
-        'user_id',
-        auth()->id()
-        )->get();
+        $menus = Menu::where('user_id', auth()->id())
+        ->where('is_active', 1)
+        ->get();
 
-
-        return view('pos.index', compact('menus'));
+    return view('pos.index', compact('menus'));
     
     }
 
